@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraVelve - Architectural Tech Specialization Diagnostic Assessment Engine">
+    <title>AuraVelve | Engineering Diagnostic Engine</title>
+    
+    <!-- Google Fonts Connection -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- External Uniform Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- START: Preloader Overlay Wrapper -->
+    <div class="preloader" id="preloader">
+        <p style="font-family: var(--font-display); color: var(--color-accent); font-size: 1.25rem;">
+            Loading Assessment Engine Matrix...
+        </p>
+    </div>
+    <!-- END: Preloader Overlay Wrapper -->
+
+
+    <!-- START: Site Header Sticky Navigation -->
+    <header class="site-header">
+        <!-- START: Navigation Container -->
+        <div class="container nav-container">
+            
+            <!-- Structural Platform Brand Logo -->
+            <a href="index.html" class="brand-logo" aria-label="AuraVelve Home">
+                <span>AURAVELVE</span>
+            </a>
+
+            <!-- START: Primary Navigation Menu -->
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="quiz.html" class="nav-link active">Assessment</a></li>
+                    <li><a href="result.html" class="nav-link">Results</a></li>
+                    <li><a href="contact.html" class="nav-link">Support & FAQ</a></li>
+                </ul>
+            </nav>
+            <!-- END: Primary Navigation Menu -->
+
+            <!-- START: Header Actions Container -->
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <!-- Light/Dark Mode Universal Theme Toggle Toggle Trigger -->
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Color Theme">
+                    🌙
+                </button>
+
+                <!-- Interactive Responsive Hamburger Trigger -->
+                <button class="hamburger" id="hamburger-toggle" aria-label="Toggle Navigation Drawer">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <!-- END: Header Actions Container -->
+
+        </div>
+        <!-- END: Navigation Container -->
+    </header>
+    <!-- END: Site Header Sticky Navigation -->
+
+
+    <!-- START: Dynamic Assessment Content Canvas -->
+    <main>
+        <!-- START: Quiz Layout Section -->
+        <section class="quiz-section section-padding">
+            <!-- START: Quiz Core Responsive Container -->
+            <div class="container" style="max-width: 800px;">
+                
+                <!-- START: Quiz Engine Floating Metrics Dashboard Header -->
+                <div class="quiz-top-bar">
+                    <!-- Progress Counter Text -->
+                    <div style="font-weight: 600; color: var(--color-text-muted);" id="progress-text">
+                        Question 1 of 8
+                    </div>
+                    <!-- Countdown Diagnostic Timer Display Area -->
+                    <div class="timer-display" id="timer-display">
+                        Time Remaining: 02:00
+                    </div>
+                </div>
+                <!-- END: Quiz Engine Floating Metrics Dashboard Header -->
+
+
+                <!-- START: Scroll-Based Progress Bar Scaffolding Area -->
+                <div style="background: rgba(28, 49, 68, 0.1); width: 100%; height: 6px; border-radius: 3px; margin-bottom: 2rem; overflow: hidden;">
+                    <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+                </div>
+                <!-- END: Scroll-Based Progress Bar Scaffolding Area -->
+
+
+                <!-- START: Question Engine Dynamic Output Slot -->
+                <div id="quiz-dynamic-wrapper">
+                    
+                    <!-- NOTE: JavaScript will inject individual dynamic cards here. 
+                         Below is the blueprint template used to display the current active card. -->
+                    
+                    <!-- START: Standard Sample Card Structure -->
+                    <div class="glass-card question-card active" id="current-question-container">
+                        <h2 style="color: var(--color-accent); font-size: 1.5rem; margin-bottom: 1.5rem;" id="question-title-text">
+                            Initializing Diagnostic Assessment Parameter Matrix...
+                        </h2>
+                        
+                        <!-- START: Selectable Options Grid Wrapper -->
+                        <div class="options-grid" id="options-grid-container">
+                            <!-- Dynamic Option Pills will be compiled cleanly via JavaScript right here -->
+                        </div>
+                        <!-- END: Selectable Options Grid Wrapper -->
+                    </div>
+                    <!-- END: Standard Sample Card Structure -->
+
+                </div>
+                <!-- END: Question Engine Dynamic Output Slot -->
+
+
+                <!-- START: Assessment Engine Interactive Controller Dock -->
+                <div class="quiz-actions">
+                    <!-- Retrospective Previous Question Button Trigger -->
+                    <button class="btn-primary" id="btn-prev" style="background: rgba(28, 49, 68, 0.15); color: var(--color-text-main); box-shadow: none;" disabled>
+                        &larr; Previous Question
+                    </button>
+                    
+                    <!-- Advancing/Submitting Context Button Trigger -->
+                    <button class="btn-primary" id="btn-next">
+                        Next Question &rarr;
+                    </button>
+                </div>
+                <!-- END: Assessment Engine Interactive Controller Dock -->
+
+            </div>
+            <!-- END: Quiz Core Responsive Container -->
+        </section>
+        <!-- END: Quiz Layout Section -->
+    </main>
+    <!-- END: Dynamic Assessment Content Canvas -->
+
+
+    <!-- START: Overarching Modal Submission Success Overlay Screen -->
+    <div class="completion-overlay" id="completion-overlay">
+        <!-- START: Modal Alert Notification Card Dialog Box -->
+        <div class="glass-card" style="text-align: center; max-width: 450px; border-color: var(--color-success); padding: var(--space-xl);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+            <h2 style="color: var(--color-accent); margin-bottom: 1rem;">Diagnostic Completed</h2>
+            <p style="color: rgba(255, 255, 255, 0.85); margin-bottom: 2rem;">
+                Your engineering core problem-solving affinity metrics have been mapped successfully. Preparing outcome data analytics dashboard breakdown...
+            </p>
+            <div style="display: flex; justify-content: center;">
+                <!-- Animated Spinner Asset Element Indicator -->
+                <div style="width: 40px; height: 40px; border: 4px solid rgba(255, 255, 255, 0.1); border-top-color: var(--color-accent); border-radius: 50%; animation: pulse 1s infinite;"></div>
+            </div>
+        </div>
+        <!-- END: Modal Alert Notification Card Dialog Box -->
+    </div>
+    <!-- END: Overarching Modal Submission Success Overlay Screen -->
+
+
+    <!-- START: Platform Main Footer Section Wrapper -->
+    <footer class="site-footer">
+        <!-- START: Global Footer Layout Container -->
+        <div class="container" style="text-align: center;">
+            <p style="font-family: var(--font-display); letter-spacing: 0.05em; margin-bottom: 0.5rem;">
+                AURAVELVE ENGINEERING DIAGNOSTIC SUITE
+            </p>
+            <p style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7);">
+                &copy; 2026 AuraVelve. Built for Software Engineering Track Alignment.
+            </p>
+        </div>
+        <!-- END: Global Footer Layout Container -->
+    </footer>
+    <!-- END: Platform Main Footer Section Wrapper -->
+
+
+    <!-- START: Floating System Action Buttons -->
+    <button id="back-to-top" class="back-to-top" aria-label="Scroll to top of page">
+        ↑
+    </button>
+    <!-- END: Floating System Action Buttons -->
+
+
+    <!-- Core JavaScript Application Scripts Attachment -->
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraVelve - Track Diagnostics Support Matrix and Frequently Asked Questions">
+    <title>AuraVelve | Support & Diagnostic FAQ</title>
+    
+    <!-- Google Fonts Connection -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- External Uniform Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- START: Preloader Overlay Wrapper -->
+    <div class="preloader" id="preloader">
+        <p style="font-family: var(--font-display); color: var(--color-accent); font-size: 1.25rem;">
+            Loading Support Infrastructure...
+        </p>
+    </div>
+    <!-- END: Preloader Overlay Wrapper -->
+
+
+    <!-- START: Site Header Sticky Navigation -->
+    <header class="site-header">
+        <!-- START: Navigation Container -->
+        <div class="container nav-container">
+            
+            <!-- Structural Platform Brand Logo -->
+            <a href="index.html" class="brand-logo" aria-label="AuraVelve Home">
+                <span>AURAVELVE</span>
+            </a>
+
+            <!-- START: Primary Navigation Menu -->
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="quiz.html" class="nav-link">Assessment</a></li>
+                    <li><a href="result.html" class="nav-link">Results</a></li>
+                    <li><a href="contact.html" class="nav-link active">Support & FAQ</a></li>
+                </ul>
+            </nav>
+            <!-- END: Primary Navigation Menu -->
+
+            <!-- START: Header Actions Container -->
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <!-- Light/Dark Mode Universal Theme Toggle -->
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Color Theme">
+                    🌙
+                </button>
+
+                <!-- Interactive Responsive Hamburger Trigger -->
+                <button class="hamburger" id="hamburger-toggle" aria-label="Toggle Navigation Drawer">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <!-- END: Header Actions Container -->
+
+        </div>
+        <!-- END: Navigation Container -->
+    </header>
+    <!-- END: Site Header Sticky Navigation -->
+
+
+    <!-- START: Main Support Portal Content Canvas -->
+    <main>
+
+      <!-- START: FAQ Section Accordion Layout -->
+<section class="faq-section section-padding">
+    <div class="container" style="max-width: 800px;">
+        <span class="eyebrow-tag">— BEFORE YOU REACH OUT</span>
+        <h1 style="text-align: center; margin-bottom: 0.5rem;">Frequently Asked Questions</h1>
+        <p style="text-align: center; color: var(--color-text-muted); margin-bottom: 2.5rem;">
+            Understand the algorithmic modeling and assessment principles behind AuraVelve.
+        </p>
+
+        <!-- START: FAQ Accordion Group -->
+        <div class="faq-accordion-group">
+
+            <div class="faq-item">
+                <button class="faq-trigger" aria-expanded="false">
+                    <span>How does the diagnostic scoring engine calculate my track match?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content">
+                    <p>
+                        The platform tracks your preferences across 8 fundamental computational parameters. Every option you select scales your affinity point weights inside four standalone development vectors.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-trigger" aria-expanded="false">
+                    <span>What happens if my answer patterns create an absolute metric tie?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content">
+                    <p>
+                        In cases where two or more engineering tracks finish with identical matrix weights, a precise programmatic tie-breaker script applies a system fallback sequence.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-trigger" aria-expanded="false">
+                    <span>Is my assessment history saved or transmitted securely?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content">
+                    <p>
+                        All calculations are processed purely client-side inside your browser sandbox using `localStorage`. Your individual metrics are never stored externally.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <!-- END: FAQ Accordion Group -->
+    </div>
+</section>
+<!-- END: FAQ Section Accordion Layout -->
+
+        <!-- START: Interactive Advisor Contact Form Section -->
+        <section class="contact-form-section section-padding" style="background: rgba(28, 49, 68, 0.02); border-top: 1px solid rgba(28, 49, 68, 0.05);">
+            <!-- START: Contact Form Container -->
+            <div class="container" style="max-width: 600px;">
+                
+                <!-- START: Contact Form Card Wrapper -->
+                <div class="glass-card">
+                    <h2 style="color: var(--color-accent); margin-bottom: 0.5rem; text-align: center;">Connect With a Track Advisor</h2>
+                    <p style="color: var(--color-text-muted); font-size: 0.95rem; text-align: center; margin-bottom: 2rem;">
+                        Have deep technical track architecture alignment questions? Drop us a secure message.
+                    </p>
+
+                    <!-- START: Standard Client Intake Form -->
+                    <form id="advisor-contact-form" novalidate>
+                        
+                        <!-- Full Name Text Input Box -->
+                        <div style="margin-bottom: 1.25rem;">
+                            <label for="contact-name" style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">Full Name</label>
+                            <input type="text" id="contact-name" placeholder="Alex Mercer" required 
+                                   style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid rgba(28, 49, 68, 0.2); background: var(--color-surface-light); font-family: inherit; color: inherit;">
+                            <span class="error-msg" id="err-name" style="color: var(--color-error); font-size: 0.8rem; display: none; margin-top: 0.25rem;">Please present your name profile.</span>
+                        </div>
+
+                        <!-- Email Address Input Box -->
+                        <div style="margin-bottom: 1.25rem;">
+                            <label for="contact-email" style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">Email Address</label>
+                            <input type="email" id="contact-email" placeholder="alex@domain.com" required 
+                                   style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid rgba(28, 49, 68, 0.2); background: var(--color-surface-light); font-family: inherit; color: inherit;">
+                            <span class="error-msg" id="err-email" style="color: var(--color-error); font-size: 0.8rem; display: none; margin-top: 0.25rem;">Please provide a valid diagnostic contact email.</span>
+                        </div>
+
+                        <!-- Message Body Content Area -->
+                        <div style="margin-bottom: 1.75rem;">
+                            <label for="contact-message" style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">Inquiry Summary Description</label>
+                            <textarea id="contact-message" rows="5" placeholder="Detail your architectural track positioning inquiries here..." required 
+                                      style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid rgba(28, 49, 68, 0.2); background: var(--color-surface-light); font-family: inherit; color: inherit; resize: vertical;"></textarea>
+                            <span class="error-msg" id="err-message" style="color: var(--color-error); font-size: 0.8rem; display: none; margin-top: 0.25rem;">Inquiry message detail parameter cannot be empty.</span>
+                        </div>
+
+                        <!-- Submit Data Control Button Trigger -->
+                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                            Dispatch Data Transmission
+                        </button>
+
+                    </form>
+                    <!-- END: Standard Client Intake Form -->
+
+                </div>
+                <!-- END: Contact Form Card Wrapper -->
+
+            </div>
+            <!-- END: Contact Form Container -->
+        </section>
+        <!-- END: Interactive Advisor Contact Form Section -->
+
+    </main>
+    <!-- END: Main Support Portal Content Canvas -->
+
+
+    <!-- START: Platform Main Footer Section Wrapper -->
+    <footer class="site-footer">
+        <!-- START: Global Footer Layout Container -->
+        <div class="container" style="text-align: center;">
+            <p style="font-family: var(--font-display); letter-spacing: 0.05em; margin-bottom: 0.5rem;">
+                AURAVELVE STACK COMMUNICATIONS
+            </p>
+            <p style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7);">
+                &copy; 2026 AuraVelve. Built for Software Engineering Track Alignment.
+            </p>
+        </div>
+        <!-- END: Global Footer Layout Container -->
+    </footer>
+    <!-- END: Platform Main Footer Section Wrapper -->
+
+
+    <!-- START: Floating System Action Buttons -->
+    <button id="back-to-top" class="back-to-top" aria-label="Scroll to top of page">
+        ↑
+    </button>
+    <!-- END: Floating System Action Buttons -->
+
+
+    <!-- Core JavaScript Application Scripts Attachment -->
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AuraVelve - Architectural Tech Specialization & Diagnostic Platform">
+    <title>AuraVelve | Engineering Track Alignment</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- START: Preloader Overlay -->
+    <div class="preloader" id="preloader">
+        <p style="font-family: var(--font-display); color: var(--color-accent); font-size: 1.25rem;">
+            Initializing AuraVelve Platform...
+        </p>
+    </div>
+    <!-- END: Preloader Overlay -->
+
+
+    <!-- START: Site Header -->
+    <header class="site-header">
+        <!-- START: Navigation Container -->
+        <div class="container nav-container">
+            
+            <!-- Brand Logo -->
+            <a href="index.html" class="brand-logo" aria-label="AuraVelve Home">
+                <span>AURAVELVE</span>
+            </a>
+
+            <!-- START: Primary Navigation Menu -->
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="quiz.html" class="nav-link">Assessment</a></li>
+                    <li><a href="result.html" class="nav-link">Results</a></li>
+                    <li><a href="contact.html" class="nav-link">Support & FAQ</a></li>
+                </ul>
+            </nav>
+            <!-- END: Primary Navigation Menu -->
+
+            <!-- START: Header Action Controls -->
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <!-- Theme Toggle Button -->
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Color Theme">
+                    🌙
+                </button>
+
+                <!-- Hamburger Mobile Trigger -->
+                <button class="hamburger" id="hamburger-toggle" aria-label="Toggle Navigation Drawer">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <!-- END: Header Action Controls -->
+
+        </div>
+        <!-- END: Navigation Container -->
+    </header>
+    <!-- END: Site Header -->
+
+
+    <!-- START: Main Content Canvas -->
+    <main>
+
+        <!-- START: Hero Section -->
+        <section class="hero-section section-padding">
+            <!-- START: Hero Container -->
+            <div class="container">
+                <!-- START: Hero Content Box -->
+                <div class="hero-content">
+                    <h1>Discover Your Engineering Identity</h1>
+                    <p>
+                        AuraVelve evaluates your core problem-solving intuition to match you with your ideal software engineering specialization track.
+                    </p>
+                    <a href="quiz.html" class="btn-primary">Start Track Diagnostic</a>
+                </div>
+                <!-- END: Hero Content Box -->
+            </div>
+            <!-- END: Hero Container -->
+        </section>
+        <!-- END: Hero Section -->
+
+
+        <!-- START: Mission Section -->
+        <section class="mission-section section-padding">
+            <!-- START: Mission Container -->
+            <div class="container">
+                <!-- START: Mission Glass Card -->
+                <div class="glass-card mission-card">
+                    <h2 style="color: var(--color-accent); margin-bottom: 1rem;">The AuraVelve Architecture</h2>
+                    <p style="margin-bottom: 1rem;">
+                        Modern computer science encompasses vast, disparate domains. Traditional learning paths often force students into specializations before they discover where their logical strengths truly lie.
+                    </p>
+                    <p>
+                        Our platform acts as a diagnostic gateway. By assessing your approach to data abstractions, system memory, user experience, and spatial computing, AuraVelve systematically directs you toward the specialization where you will thrive most.
+                    </p>
+                </div>
+                <!-- END: Mission Glass Card -->
+            </div>
+            <!-- END: Mission Container -->
+        </section>
+        <!-- END: Mission Section -->
+
+
+        <!-- START: Specialization Tracks Section -->
+        <section class="tracks-section section-padding">
+            <!-- START: Tracks Container -->
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 0.5rem; color: var(--color-primary);">
+                    Core Specialization Tracks
+                </h2>
+                <p style="text-align: center; color: var(--color-text-muted); margin-bottom: 2rem;">
+                    Targeted disciplines evaluated within the assessment platform
+                </p>
+
+                <!-- START: Specialization Tracks Grid -->
+                <div class="tracks-grid">
+
+                    <!-- START: Track Card 1 - ML -->
+                    <div class="track-card">
+                        <div class="track-icon" style="background: rgba(0, 168, 150, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #00A896;">
+                            ML
+                        </div>
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">Machine Learning & AI</h3>
+                        <p style="color: var(--color-text-muted); font-size: 0.95rem;">
+                            Focused on algorithmic modeling, statistical inference, neural network architectures, and data pattern analysis.
+                        </p>
+                    </div>
+                    <!-- END: Track Card 1 - ML -->
+
+                    <!-- START: Track Card 2 - Full Stack -->
+                    <div class="track-card">
+                        <div class="track-icon" style="background: rgba(212, 175, 55, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #D4AF37;">
+                            FS
+                        </div>
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">Full-Stack Development</h3>
+                        <p style="color: var(--color-text-muted); font-size: 0.95rem;">
+                            End-to-end web architectures, combining client-side rendering with scalable server APIs and database persistence.
+                        </p>
+                    </div>
+                    <!-- END: Track Card 2 - Full Stack -->
+
+                    <!-- START: Track Card 3 - AR/VR -->
+                    <div class="track-card">
+                        <div class="track-icon" style="background: rgba(128, 0, 32, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #800020;">
+                            XR
+                        </div>
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">AR / VR & Spatial Tech</h3>
+                        <p style="color: var(--color-text-muted); font-size: 0.95rem;">
+                            Immersive 3D environments, real-time spatial physics, shader graphics, and interactive engine development.
+                        </p>
+                    </div>
+                    <!-- END: Track Card 3 - AR/VR -->
+
+                    <!-- START: Track Card 4 - Low Level -->
+                    <div class="track-card">
+                        <div class="track-icon" style="background: rgba(28, 49, 68, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #1C3144;">
+                            SYS
+                        </div>
+                        <h3 style="margin-bottom: 0.5rem; font-size: 1.25rem;">Low-Level & Systems</h3>
+                        <p style="color: var(--color-text-muted); font-size: 0.95rem;">
+                            Memory management, hardware interfaces, embedded operating systems, and high-performance kernel computing.
+                        </p>
+                    </div>
+                    <!-- END: Track Card 4 - Low Level -->
+
+                </div>
+                <!-- END: Specialization Tracks Grid -->
+            </div>
+            <!-- END: Tracks Container -->
+        </section>
+        <!-- END: Specialization Tracks Section -->
+
+
+        <!-- START: Assessment Gateway Section -->
+        <section class="assessment-gateway section-padding">
+            <!-- START: Gateway Container -->
+            <div class="container">
+                <!-- START: Gateway Glass Card -->
+                <div class="glass-card gateway-card">
+                    <h2 style="color: var(--color-accent); margin-bottom: 1rem;">Ready to Align Your Skillset?</h2>
+                    <p style="margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        Take the 8-question timed diagnostic assessment to calculate your affinity across all four engineering domains.
+                    </p>
+                    <a href="quiz.html" class="btn-primary">Launch Assessment Engine</a>
+                </div>
+                <!-- END: Gateway Glass Card -->
+            </div>
+            <!-- END: Gateway Container -->
+        </section>
+        <!-- END: Assessment Gateway Section -->
+
+    </main>
+    <!-- END: Main Content Canvas -->
+
+
+    <!-- START: Site Footer -->
+    <footer class="site-footer">
+        <!-- START: Footer Container -->
+        <div class="container" style="text-align: center;">
+            <p style="font-family: var(--font-display); letter-spacing: 0.05em; margin-bottom: 0.5rem;">
+                AURAVELVE ENGINEERING PLATFORM
+            </p>
+            <p style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7);">
+                &copy; 2026 AuraVelve. Built for Software Engineering Track Diagnostic.
+            </p>
+        </div>
+        <!-- END: Footer Container -->
+    </footer>
+    <!-- END: Site Footer -->
+
+
+    <!-- START: Back To Top Action Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Scroll to top of page">
+        ↑
+    </button>
+    <!-- END: Back To Top Action Button -->
+
+
+    <!-- JavaScript Core Script -->
+    <script src="js/main.js"></script>
+</body>
+</html>
