@@ -1,190 +1,231 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AuraVelve - Architectural Tech Specialization Diagnostic Assessment Engine">
-    <title>AuraVelve | Engineering Diagnostic Engine</title>
-    
-    <!-- Google Fonts Connection -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- External Uniform Stylesheet -->
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSE Specialisation Advisor - Quiz</title>
+  <!-- Linking our one shared stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <!-- START: Preloader Overlay Wrapper -->
-    <div class="preloader" id="preloader">
-        <p style="font-family: var(--font-display); color: var(--color-accent); font-size: 1.25rem;">
-            Loading Assessment Engine Matrix...
+  <!-- ==========================================
+       HEADER & NAVIGATION
+       Same header as index.html so the site feels
+       consistent as the student moves between pages.
+       ========================================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-logo">BSE <span>Advisor</span></div>
+
+      <!-- Desktop navigation menu -->
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quiz.html" class="active">Quiz</a></li>
+          <li><a href="results.html">Results</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <!-- Theme toggle button. JS listens for clicks on this -->
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle dark and light theme">
+          🌙
+        </button>
+
+        <!-- Hamburger button, only visible on small screens -->
+        <button id="hamburgerBtn" class="hamburger-btn" aria-label="Open mobile menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile full-screen overlay menu, hidden until hamburger is clicked -->
+  <div id="mobileOverlay" class="mobile-overlay">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ==========================================
+       MAIN PAGE CONTENT
+       ========================================== -->
+  <main>
+
+    <!-- QUIZ INTRO: short heading and instructions so the
+         student knows how the quiz works before starting -->
+    <section class="container" style="padding-top: var(--space-lg);">
+      <h1 style="text-align:center; margin-bottom: var(--space-sm);">Specialisation Quiz</h1>
+      <p style="text-align:center; max-width: 650px; margin: 0 auto var(--space-lg) auto;">
+        Answer each question honestly. Every answer adds points to one of the
+        four specialisation tracks. Some questions include a campus map,
+        audio clip, or short video, so keep your sound on. Watch the timer
+        in the top corner &mdash; if it runs out, the quiz moves on for you.
+      </p>
+    </section>
+
+    <section class="container" style="max-width: 750px; margin-bottom: var(--space-xl);">
+
+      <!-- ==========================================
+           QUIZ HEADER BAR
+           Shows which question we are on and the
+           countdown timer for the current question.
+           quiz-engine.js updates both of these values.
+           ========================================== -->
+      <div class="quiz-header-bar">
+        <p id="questionCounter" style="font-weight:600;">Question 1 of 10</p>
+        <div id="timerDisplay" class="timer-display">00:30</div>
+      </div>
+
+      <!-- ==========================================
+           PROGRESS BAR
+           The fill width is updated by JS every time
+           the student moves to a new question.
+           ========================================== -->
+      <div class="progress-track">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+
+      <!-- Message shown only when the timer reaches zero.
+           Hidden by default using the standard HTML
+           "hidden" attribute (no custom CSS class needed). -->
+      <p id="timeUpMessage" class="error-message" hidden>
+        Time is up for this question! Moving on automatically&hellip;
+      </p>
+
+      <!-- ==========================================
+           MAIN QUESTION CARD
+           quiz-engine.js fills in the question text and
+           builds the answer buttons inside these two
+           empty containers below.
+           ========================================== -->
+      <div class="card">
+        <p id="quizQuestionText" class="quiz-question-text">
+          Loading your first question&hellip;
         </p>
-    </div>
-    <!-- END: Preloader Overlay Wrapper -->
 
+        <!-- quiz-engine.js will insert one .quiz-option-btn
+             button here for every answer choice -->
+        <div id="quizOptionsList" class="quiz-options-list"></div>
 
-    <!-- START: Site Header Sticky Navigation -->
-    <header class="site-header">
-        <!-- START: Navigation Container -->
-        <div class="container nav-container">
-            
-            <!-- Structural Platform Brand Logo -->
-            <a href="index.html" class="brand-logo" aria-label="AuraVelve Home">
-                <span>AURAVELVE</span>
-            </a>
+        <!-- ==========================================
+             INTERACTIVE MEDIA ZONE
+             These three blocks only relate to certain
+             questions. quiz-engine.js shows the correct
+             one (and hides the other two) depending on
+             which question is currently on screen.
+             ========================================== -->
 
-            <!-- START: Primary Navigation Menu -->
-            <nav>
-                <ul class="nav-menu" id="nav-menu">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="quiz.html" class="nav-link active">Assessment</a></li>
-                    <li><a href="result.html" class="nav-link">Results</a></li>
-                    <li><a href="contact.html" class="nav-link">Support & FAQ</a></li>
-                </ul>
-            </nav>
-            <!-- END: Primary Navigation Menu -->
+        <!-- MEDIA BLOCK 1: Coordinate hotspot map (ALCHE campus) -->
+        <div id="hotspotMediaBlock" style="margin-top: var(--space-md);" hidden>
+          <p style="margin-bottom: var(--space-sm);">
+            Click the marker on the ALCHE campus map that matches your answer.
+          </p>
+          <div class="hotspot-map-wrapper">
+            <!-- Replace this src with the real campus map image file -->
+            <img src="images/alche-campus-map.jpg" alt="Map of the ALCHE campus" id="campusMapImage">
 
-            <!-- START: Header Actions Container -->
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <!-- Light/Dark Mode Universal Theme Toggle Toggle Trigger -->
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Color Theme">
-                    🌙
-                </button>
+            <!-- Each marker is a real button so it stays keyboard
+                 accessible, positioned with simple top/left percentages -->
+            <button type="button" class="hotspot-marker" id="hotspotEngineeringLab"
+              style="top:35%; left:28%;"
+              data-hotspot-id="engineering-lab"
+              aria-label="Engineering Lab marker"></button>
 
-                <!-- Interactive Responsive Hamburger Trigger -->
-                <button class="hamburger" id="hamburger-toggle" aria-label="Toggle Navigation Drawer">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-            <!-- END: Header Actions Container -->
+            <button type="button" class="hotspot-marker" id="hotspotMediaStudio"
+              style="top:55%; left:62%;"
+              data-hotspot-id="media-studio"
+              aria-label="Media Studio marker"></button>
 
+            <button type="button" class="hotspot-marker" id="hotspotDataLab"
+              style="top:72%; left:40%;"
+              data-hotspot-id="data-lab"
+              aria-label="Data Lab marker"></button>
+          </div>
         </div>
-        <!-- END: Navigation Container -->
-    </header>
-    <!-- END: Site Header Sticky Navigation -->
 
+        <!-- MEDIA BLOCK 2: Custom audio player -->
+        <div id="audioMediaBlock" style="margin-top: var(--space-md);" hidden>
+          <p style="margin-bottom: var(--space-sm);">
+            Listen to the short clip, then choose the answer that fits best.
+          </p>
 
-    <!-- START: Dynamic Assessment Content Canvas -->
-    <main>
-        <!-- START: Quiz Layout Section -->
-        <section class="quiz-section section-padding">
-            <!-- START: Quiz Core Responsive Container -->
-            <div class="container" style="max-width: 800px;">
-                
-                <!-- START: Quiz Engine Floating Metrics Dashboard Header -->
-                <div class="quiz-top-bar">
-                    <!-- Progress Counter Text -->
-                    <div style="font-weight: 600; color: var(--color-text-muted);" id="progress-text">
-                        Question 1 of 8
-                    </div>
-                    <!-- Countdown Diagnostic Timer Display Area -->
-                    <div class="timer-display" id="timer-display">
-                        Time Remaining: 02:00
-                    </div>
-                </div>
-                <!-- END: Quiz Engine Floating Metrics Dashboard Header -->
+          <!-- The native audio element stays hidden. We build our
+               own play button and seek bar so the controls match
+               the site's design instead of the browser default look. -->
+          <audio id="quizAudioElement" preload="metadata" style="display:none;">
+            <!-- Replace this src with the real audio clip file -->
+            <source src="media/specialisation-clip.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
 
-
-                <!-- START: Scroll-Based Progress Bar Scaffolding Area -->
-                <div style="background: rgba(28, 49, 68, 0.1); width: 100%; height: 6px; border-radius: 3px; margin-bottom: 2rem; overflow: hidden;">
-                    <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
-                </div>
-                <!-- END: Scroll-Based Progress Bar Scaffolding Area -->
-
-
-                <!-- START: Question Engine Dynamic Output Slot -->
-                <div id="quiz-dynamic-wrapper">
-                    
-                    <!-- NOTE: JavaScript will inject individual dynamic cards here. 
-                         Below is the blueprint template used to display the current active card. -->
-                    
-                    <!-- START: Standard Sample Card Structure -->
-                    <div class="glass-card question-card active" id="current-question-container">
-                        <h2 style="color: var(--color-accent); font-size: 1.5rem; margin-bottom: 1.5rem;" id="question-title-text">
-                            Initializing Diagnostic Assessment Parameter Matrix...
-                        </h2>
-                        
-                        <!-- START: Selectable Options Grid Wrapper -->
-                        <div class="options-grid" id="options-grid-container">
-                            <!-- Dynamic Option Pills will be compiled cleanly via JavaScript right here -->
-                        </div>
-                        <!-- END: Selectable Options Grid Wrapper -->
-                    </div>
-                    <!-- END: Standard Sample Card Structure -->
-
-                </div>
-                <!-- END: Question Engine Dynamic Output Slot -->
-
-
-                <!-- START: Assessment Engine Interactive Controller Dock -->
-                <div class="quiz-actions">
-                    <!-- Retrospective Previous Question Button Trigger -->
-                    <button class="btn-primary" id="btn-prev" style="background: rgba(28, 49, 68, 0.15); color: var(--color-text-main); box-shadow: none;" disabled>
-                        &larr; Previous Question
-                    </button>
-                    
-                    <!-- Advancing/Submitting Context Button Trigger -->
-                    <button class="btn-primary" id="btn-next">
-                        Next Question &rarr;
-                    </button>
-                </div>
-                <!-- END: Assessment Engine Interactive Controller Dock -->
-
-            </div>
-            <!-- END: Quiz Core Responsive Container -->
-        </section>
-        <!-- END: Quiz Layout Section -->
-    </main>
-    <!-- END: Dynamic Assessment Content Canvas -->
-
-
-    <!-- START: Overarching Modal Submission Success Overlay Screen -->
-    <div class="completion-overlay" id="completion-overlay">
-        <!-- START: Modal Alert Notification Card Dialog Box -->
-        <div class="glass-card" style="text-align: center; max-width: 450px; border-color: var(--color-success); padding: var(--space-xl);">
-            <div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
-            <h2 style="color: var(--color-accent); margin-bottom: 1rem;">Diagnostic Completed</h2>
-            <p style="color: rgba(255, 255, 255, 0.85); margin-bottom: 2rem;">
-                Your engineering core problem-solving affinity metrics have been mapped successfully. Preparing outcome data analytics dashboard breakdown...
-            </p>
-            <div style="display: flex; justify-content: center;">
-                <!-- Animated Spinner Asset Element Indicator -->
-                <div style="width: 40px; height: 40px; border: 4px solid rgba(255, 255, 255, 0.1); border-top-color: var(--color-accent); border-radius: 50%; animation: pulse 1s infinite;"></div>
-            </div>
+          <div class="audio-player-box">
+            <button type="button" id="audioPlayBtn" class="audio-play-btn" aria-label="Play audio clip">
+              &#9654;
+            </button>
+            <input type="range" id="audioSeekBar" min="0" max="100" value="0" style="flex:1;">
+            <span id="audioTimeLabel" style="min-width:70px; text-align:right;">0:00 / 0:00</span>
+          </div>
         </div>
-        <!-- END: Modal Alert Notification Card Dialog Box -->
-    </div>
-    <!-- END: Overarching Modal Submission Success Overlay Screen -->
 
+        <!-- MEDIA BLOCK 3: Video scenario that auto-pauses -->
+        <div id="videoMediaBlock" style="margin-top: var(--space-md);" hidden>
+          <p style="margin-bottom: var(--space-sm);">
+            Watch the scenario. The video will pause on its own at key
+            moments so you can answer what you would do next.
+          </p>
 
-    <!-- START: Platform Main Footer Section Wrapper -->
-    <footer class="site-footer">
-        <!-- START: Global Footer Layout Container -->
-        <div class="container" style="text-align: center;">
-            <p style="font-family: var(--font-display); letter-spacing: 0.05em; margin-bottom: 0.5rem;">
-                AURAVELVE ENGINEERING DIAGNOSTIC SUITE
-            </p>
-            <p style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7);">
-                &copy; 2026 AuraVelve. Built for Software Engineering Track Alignment.
-            </p>
+          <!-- data-pause-timestamps lists (in seconds) the exact
+               moments quiz-engine.js should pause this video at -->
+          <video id="quizVideoElement" width="100%" preload="metadata"
+            data-pause-timestamps="5,12">
+            <!-- Replace this src with the real scenario video file -->
+            <source src="media/scenario-video.mp4" type="video/mp4">
+            Your browser does not support the video element.
+          </video>
         </div>
-        <!-- END: Global Footer Layout Container -->
-    </footer>
-    <!-- END: Platform Main Footer Section Wrapper -->
 
+        <!-- ==========================================
+             QUIZ NAVIGATION BUTTONS
+             Previous/Next move between questions, and
+             Submit Quiz only appears on the final one.
+             ========================================== -->
+        <div style="display:flex; justify-content:space-between; gap: var(--space-sm); margin-top: var(--space-lg);">
+          <button type="button" id="prevQuestionBtn" class="btn-primary magnetic-btn" disabled>
+            Previous
+          </button>
+          <button type="button" id="nextQuestionBtn" class="btn-primary magnetic-btn">
+            Next
+          </button>
+          <button type="button" id="submitQuizBtn" class="btn-primary magnetic-btn" hidden>
+            Submit Quiz
+          </button>
+        </div>
+      </div>
 
-    <!-- START: Floating System Action Buttons -->
-    <button id="back-to-top" class="back-to-top" aria-label="Scroll to top of page">
-        ↑
-    </button>
-    <!-- END: Floating System Action Buttons -->
+    </section>
 
+  </main>
 
-    <!-- Core JavaScript Application Scripts Attachment -->
-    <script src="js/main.js"></script>
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="site-footer">
+    <p>&copy; 2026 BSE Specialisation Advisor. Built for the ALU Software Engineering programme.</p>
+  </footer>
+
+  <!-- Back to top floating button, hidden until the user scrolls -->
+  <button id="backToTopFab" class="back-to-top-fab" aria-label="Back to top">↑</button>
+
+  <!-- Our JavaScript file for this page.
+       "defer" makes sure the HTML loads first before the script runs. -->
+  <script src="js/quiz-engine.js" defer></script>
 </body>
 </html>
