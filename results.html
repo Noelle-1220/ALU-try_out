@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSE Specialisation Advisor - Your Results</title>
+  <!-- Linking our one shared stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ==========================================
+       HEADER & NAVIGATION
+       Same header as the other pages so the site
+       feels consistent as the student moves around.
+       ========================================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-logo">BSE <span>Advisor</span></div>
+
+      <!-- Desktop navigation menu -->
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
+          <li><a href="results.html" class="active">Results</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <!-- Theme toggle button. JS listens for clicks on this -->
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle dark and light theme">
+          🌙
+        </button>
+
+        <!-- Hamburger button, only visible on small screens -->
+        <button id="hamburgerBtn" class="hamburger-btn" aria-label="Open mobile menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile full-screen overlay menu, hidden until hamburger is clicked -->
+  <div id="mobileOverlay" class="mobile-overlay">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ==========================================
+       MAIN PAGE CONTENT
+       Everything results-related sits inside
+       #resultsPageRoot. scoring.js checks for this
+       element first, so it knows it is safe to run
+       on this page.
+       ========================================== -->
+  <main>
+    <div id="resultsPageRoot">
+
+      <!-- ==========================================
+           PRELOADER SCREEN
+           Covers the whole page while scoring.js
+           "calculates" the result. scoring.js hides
+           this element once it is done working out
+           the scores.
+           ========================================== -->
+      <div id="preloaderScreen" class="preloader-screen">
+        <div class="preloader-logo">BSE <span>Advisor</span></div>
+        <div class="preloader-spinner"></div>
+        <p>Calculating your specialisation result&hellip;</p>
+      </div>
+
+      <!-- ==========================================
+           NO RESULTS MESSAGE
+           Only shown if a visitor opens this page
+           without ever completing the quiz, so the
+           page still makes sense instead of showing
+           empty boxes. Hidden by default.
+           ========================================== -->
+      <section class="container" id="noResultsMessage" style="max-width:600px; text-align:center; padding-top: var(--space-xl);" hidden>
+        <h1 style="margin-bottom: var(--space-sm);">No Quiz Results Found</h1>
+        <p>
+          It looks like you have not completed the quiz yet, or your
+          answers could not be found on this device. Please take the
+          quiz first so we can work out your specialisation match.
+        </p>
+        <a href="quiz.html" class="btn-primary magnetic-btn"
+          style="display:inline-block; margin-top: var(--space-md); text-decoration:none;">
+          Take the Quiz
+        </a>
+      </section>
+
+      <!-- ==========================================
+           RESULTS CONTENT
+           Hidden by default. scoring.js reveals this
+           section and fills in every value inside it
+           once the preloader delay is finished.
+           ========================================== -->
+      <section class="container" id="resultsContent" style="max-width:750px; padding-top: var(--space-lg); padding-bottom: var(--space-xl);" hidden>
+
+        <!-- OUTCOME REVEAL -->
+        <h1 class="results-outcome-title">Your Best-Fit Specialisation Is</h1>
+        <p class="results-outcome-track" id="topTrackName">Loading&hellip;</p>
+
+        <div class="card" style="margin-bottom: var(--space-lg);">
+          <h2 style="margin-bottom: var(--space-sm);">What This Means For You</h2>
+          <p id="topTrackDescription">Working out your personalised guidance&hellip;</p>
+        </div>
+
+        <!-- SCORE BREAKDOWN -->
+        <div class="card" style="margin-bottom: var(--space-lg);">
+          <h2 style="margin-bottom: var(--space-md);">Score Breakdown</h2>
+
+          <div style="display:flex; justify-content:space-between; padding: var(--space-sm) 0; border-bottom:1px solid var(--color-border);">
+            <span>Low-Level Programming</span>
+            <span id="scoreLowLevel">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding: var(--space-sm) 0; border-bottom:1px solid var(--color-border);">
+            <span>AR/VR</span>
+            <span id="scoreArVr">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding: var(--space-sm) 0; border-bottom:1px solid var(--color-border);">
+            <span>Full-Stack Web Development</span>
+            <span id="scoreFullStack">0</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding: var(--space-sm) 0;">
+            <span>Machine Learning</span>
+            <span id="scoreMachineLearning">0</span>
+          </div>
+        </div>
+
+        <!-- STREAK / SPEED BONUS -->
+        <div class="card" style="margin-bottom: var(--space-lg);">
+          <h2 style="margin-bottom: var(--space-sm);">Speed &amp; Streak Bonus</h2>
+          <p id="streakBonusDisplay">Longest fast-answer streak: 0 question(s) in a row</p>
+          <p id="speedBonusDisplay">Bonus points earned from quick answers: 0</p>
+        </div>
+
+        <!-- ==========================================
+             CANVAS GRAPH
+             canvas-charts.js draws the bar/radar chart
+             (and the particle/confetti animation) onto
+             this canvas once the results are ready.
+             ========================================== -->
+        <div class="canvas-chart-wrapper">
+          <canvas id="resultsCanvas" width="700" height="400">
+            Your browser does not support the canvas element, so the
+            results graph cannot be shown here.
+          </canvas>
+        </div>
+
+        <!-- CALL-TO-ACTION BUTTONS -->
+        <div style="display:flex; gap: var(--space-sm); justify-content:center; margin-top: var(--space-lg); flex-wrap: wrap;">
+          <a href="quiz.html" class="btn-primary magnetic-btn" style="text-decoration:none;">
+            Retake the Quiz
+          </a>
+          <a href="contact.html" class="btn-primary magnetic-btn" style="text-decoration:none;">
+            Contact the Author
+          </a>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="site-footer">
+    <p>&copy; 2026 BSE Specialisation Advisor. Built for the ALU Software Engineering programme.</p>
+  </footer>
+
+  <!-- Back to top floating button, hidden until the user scrolls -->
+  <button id="backToTopFab" class="back-to-top-fab" aria-label="Back to top">↑</button>
+
+  <!-- Our JavaScript files for this page.
+       "defer" makes sure the HTML loads first before either
+       script runs. scoring.js is listed first because
+       canvas-charts.js depends on the numbers it calculates. -->
+  <script src="js/scoring.js" defer></script>
+  <script src="js/canvas-charts.js" defer></script>
+</body>
+</html>

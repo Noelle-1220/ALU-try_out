@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
      -------------------------------------------------------- */
   function showNoResultsMessage() {
     if (preloaderScreen) {
-      preloaderScreen.hidden = true;
+      preloaderScreen.classList.add("preloader-hidden");
     }
     if (resultsContent) {
       resultsContent.hidden = true;
@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     setTimeout(function () {
       if (preloaderScreen) {
-        preloaderScreen.hidden = true;
+        preloaderScreen.classList.add("preloader-hidden");
       }
       if (resultsContent) {
         resultsContent.hidden = false;
