@@ -1,213 +1,187 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AuraVelve - Track Diagnostics Support Matrix and Frequently Asked Questions">
-    <title>AuraVelve | Support & Diagnostic FAQ</title>
-    
-    <!-- Google Fonts Connection -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- External Uniform Stylesheet -->
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BSE Specialisation Advisor - Contact</title>
+  <!-- Linking our one shared stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <!-- START: Preloader Overlay Wrapper -->
-    <div class="preloader" id="preloader">
-        <p style="font-family: var(--font-display); color: var(--color-accent); font-size: 1.25rem;">
-            Loading Support Infrastructure...
-        </p>
+  <!-- ==========================================
+       HEADER & NAVIGATION
+       Same header as the other pages so the site
+       feels consistent as the student moves around.
+       ========================================== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-logo">BSE <span>Advisor</span></div>
+
+      <!-- Desktop navigation menu -->
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
+          <li><a href="results.html">Results</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <!-- Theme toggle button. JS listens for clicks on this -->
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle dark and light theme">
+          🌙
+        </button>
+
+        <!-- Hamburger button, only visible on small screens -->
+        <button id="hamburgerBtn" class="hamburger-btn" aria-label="Open mobile menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
-    <!-- END: Preloader Overlay Wrapper -->
+  </header>
 
+  <!-- Mobile full-screen overlay menu, hidden until hamburger is clicked -->
+  <div id="mobileOverlay" class="mobile-overlay">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
 
-    <!-- START: Site Header Sticky Navigation -->
-    <header class="site-header">
-        <!-- START: Navigation Container -->
-        <div class="container nav-container">
-            
-            <!-- Structural Platform Brand Logo -->
-            <a href="index.html" class="brand-logo" aria-label="AuraVelve Home">
-                <span>AURAVELVE</span>
-            </a>
+  <!-- ==========================================
+       MAIN PAGE CONTENT
+       ========================================== -->
+  <main>
 
-            <!-- START: Primary Navigation Menu -->
-            <nav>
-                <ul class="nav-menu" id="nav-menu">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="quiz.html" class="nav-link">Assessment</a></li>
-                    <li><a href="result.html" class="nav-link">Results</a></li>
-                    <li><a href="contact.html" class="nav-link active">Support & FAQ</a></li>
-                </ul>
-            </nav>
-            <!-- END: Primary Navigation Menu -->
+    <!-- ==========================================
+         AUTHOR DETAILS
+         A short bio card introducing whoever built
+         this site, with a link to the public GitHub
+         repository for the project.
+         ========================================== -->
+    <section class="container" style="max-width: 700px; padding-top: var(--space-lg);">
+      <h1 style="text-align:center; margin-bottom: var(--space-lg);">About the Author</h1>
 
-            <!-- START: Header Actions Container -->
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <!-- Light/Dark Mode Universal Theme Toggle -->
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Color Theme">
-                    🌙
-                </button>
+      <div class="card" style="margin-bottom: var(--space-xl);">
+        <h2 style="margin-bottom: var(--space-sm);">Author Name</h2>
+        <p style="margin-bottom: var(--space-md);">
+          I am a Software Engineering student who built the BSE Specialisation
+          Advisor as a project to help fellow students figure out which
+          specialisation track &mdash; Low-Level Programming, AR/VR,
+          Full-Stack Web Development, or Machine Learning &mdash; best fits
+          their interests and strengths. The whole site was built from
+          scratch using only HTML5, CSS3, and vanilla JavaScript, with no
+          external frameworks or libraries.
+        </p>
+        <a
+          href="https://github.com/your-username/bse-specialisation-advisor"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary magnetic-btn"
+          style="display:inline-block; text-decoration:none;"
+        >
+          View the Project on GitHub
+        </a>
+      </div>
+    </section>
 
-                <!-- Interactive Responsive Hamburger Trigger -->
-                <button class="hamburger" id="hamburger-toggle" aria-label="Toggle Navigation Drawer">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-            <!-- END: Header Actions Container -->
-
-        </div>
-        <!-- END: Navigation Container -->
-    </header>
-    <!-- END: Site Header Sticky Navigation -->
-
-
-    <!-- START: Main Support Portal Content Canvas -->
-    <main>
-
-      <!-- START: FAQ Section Accordion Layout -->
-<section class="faq-section section-padding">
-    <div class="container" style="max-width: 800px;">
-        <span class="eyebrow-tag">— BEFORE YOU REACH OUT</span>
-        <h1 style="text-align: center; margin-bottom: 0.5rem;">Frequently Asked Questions</h1>
-        <p style="text-align: center; color: var(--color-text-muted); margin-bottom: 2.5rem;">
-            Understand the algorithmic modeling and assessment principles behind AuraVelve.
+    <!-- ==========================================
+         INTERACTIVE CONTACT FORM
+         Same inline, real-time validation pattern as
+         the registration form on index.html: instant
+         checking on input/blur, is-valid/is-invalid
+         classes, and an error-message under each field.
+         The actual checking logic lives in validation.js
+         so both forms share one file.
+         ========================================== -->
+    <section class="container" style="max-width: 550px; margin-bottom: var(--space-xl);">
+      <div class="card">
+        <h2 style="text-align:center; margin-bottom: var(--space-md);">Get In Touch</h2>
+        <p style="text-align:center; margin-bottom: var(--space-md);">
+          Have feedback on the quiz, spotted a bug, or just want to say hello?
+          Fill in the form below.
         </p>
 
-        <!-- START: FAQ Accordion Group -->
-        <div class="faq-accordion-group">
+        <!-- Success message shown once the form has been
+             submitted successfully. Hidden until then. -->
+        <p id="contactSuccessMessage" class="error-message" style="color: var(--accent-green);" hidden>
+          Thanks! Your message has been received.
+        </p>
 
-            <div class="faq-item">
-                <button class="faq-trigger" aria-expanded="false">
-                    <span>How does the diagnostic scoring engine calculate my track match?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-content">
-                    <p>
-                        The platform tracks your preferences across 8 fundamental computational parameters. Every option you select scales your affinity point weights inside four standalone development vectors.
-                    </p>
-                </div>
-            </div>
+        <!-- We use novalidate so the browser's built-in popups
+             do not appear. Our own JS handles all validation. -->
+        <form id="contactForm" novalidate>
 
-            <div class="faq-item">
-                <button class="faq-trigger" aria-expanded="false">
-                    <span>What happens if my answer patterns create an absolute metric tie?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-content">
-                    <p>
-                        In cases where two or more engineering tracks finish with identical matrix weights, a precise programmatic tie-breaker script applies a system fallback sequence.
-                    </p>
-                </div>
-            </div>
+          <!-- Name field: letters and spaces only, same rule
+               as the registration form's Student Name field -->
+          <div class="form-group">
+            <label for="contactName">Your Name</label>
+            <input
+              type="text"
+              id="contactName"
+              name="contactName"
+              placeholder="e.g. Jane Doe"
+              autocomplete="off"
+            >
+            <small class="error-message" id="contactNameError"></small>
+          </div>
 
-            <div class="faq-item">
-                <button class="faq-trigger" aria-expanded="false">
-                    <span>Is my assessment history saved or transmitted securely?</span>
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-contegit addnt">
-                    <p>
-                        All calculations are processed purely client-side inside your browser sandbox using `localStorage`. Your individual metrics are never stored externally.
-                    </p>
-                </div>
-            </div>
+          <!-- Email field: any standard, valid email address -->
+          <div class="form-group">
+            <label for="contactEmail">Your Email</label>
+            <input
+              type="text"
+              id="contactEmail"
+              name="contactEmail"
+              placeholder="e.g. jane.doe@example.com"
+              autocomplete="off"
+            >
+            <small class="error-message" id="contactEmailError"></small>
+          </div>
 
-        </div>
-        <!-- END: FAQ Accordion Group -->
-    </div>
-</section>
-<!-- END: FAQ Section Accordion Layout -->
+          <!-- Message field: a short text area for feedback -->
+          <div class="form-group">
+            <label for="contactMessage">Your Message</label>
+            <textarea
+              id="contactMessage"
+              name="contactMessage"
+              rows="5"
+              placeholder="Type your feedback or question here..."
+            ></textarea>
+            <small class="error-message" id="contactMessageError"></small>
+          </div>
 
-        <!-- START: Interactive Advisor Contact Form Section -->
-        <section class="contact-form-section section-padding" style="background: rgba(28, 49, 68, 0.02); border-top: 1px solid rgba(28, 49, 68, 0.05);">
-            <!-- START: Contact Form Container -->
-            <div class="container" style="max-width: 600px;">
-                
-                <!-- START: Contact Form Card Wrapper -->
-                <div class="glass-card">
-                    <h2 style="color: var(--color-accent); margin-bottom: 0.5rem; text-align: center;">Connect With a Track Advisor</h2>
-                    <p style="color: var(--color-text-muted); font-size: 0.95rem; text-align: center; margin-bottom: 2rem;">
-                        Have deep technical track architecture alignment questions? Drop us a secure message.
-                    </p>
+          <!-- Send button: disabled by default. JS enables it
+               only once every field above is valid. -->
+          <button type="submit" id="contactSubmitBtn" class="btn-primary magnetic-btn" style="width:100%;" disabled>
+            Send Message
+          </button>
+        </form>
+      </div>
+    </section>
 
-                    <!-- START: Standard Client Intake Form -->
-                    <form id="advisor-contact-form" novalidate>
-                        
-                        <!-- Full Name Text Input Box -->
-                        <div style="margin-bottom: 1.25rem;">
-                            <label for="contact-name" style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">Full Name</label>
-                            <input type="text" id="contact-name" placeholder="Alex Mercer" required 
-                                   style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid rgba(28, 49, 68, 0.2); background: var(--color-surface-light); font-family: inherit; color: inherit;">
-                            <span class="error-msg" id="err-name" style="color: var(--color-error); font-size: 0.8rem; display: none; margin-top: 0.25rem;">Please present your name profile.</span>
-                        </div>
+  </main>
 
-                        <!-- Email Address Input Box -->
-                        <div style="margin-bottom: 1.25rem;">
-                            <label for="contact-email" style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">Email Address</label>
-                            <input type="email" id="contact-email" placeholder="alex@domain.com" required 
-                                   style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid rgba(28, 49, 68, 0.2); background: var(--color-surface-light); font-family: inherit; color: inherit;">
-                            <span class="error-msg" id="err-email" style="color: var(--color-error); font-size: 0.8rem; display: none; margin-top: 0.25rem;">Please provide a valid diagnostic contact email.</span>
-                        </div>
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="site-footer">
+    <p>&copy; 2026 BSE Specialisation Advisor. Built for the ALU Software Engineering programme.</p>
+  </footer>
 
-                        <!-- Message Body Content Area -->
-                        <div style="margin-bottom: 1.75rem;">
-                            <label for="contact-message" style="display: block; font-weight: 600; margin-bottom: 0.5rem; font-size: 0.9rem;">Inquiry Summary Description</label>
-                            <textarea id="contact-message" rows="5" placeholder="Detail your architectural track positioning inquiries here..." required 
-                                      style="width: 100%; padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid rgba(28, 49, 68, 0.2); background: var(--color-surface-light); font-family: inherit; color: inherit; resize: vertical;"></textarea>
-                            <span class="error-msg" id="err-message" style="color: var(--color-error); font-size: 0.8rem; display: none; margin-top: 0.25rem;">Inquiry message detail parameter cannot be empty.</span>
-                        </div>
+  <!-- Back to top floating button, hidden until the user scrolls -->
+  <button id="backToTopFab" class="back-to-top-fab" aria-label="Back to top">↑</button>
 
-                        <!-- Submit Data Control Button Trigger -->
-                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
-                            Dispatch Data Transmission
-                        </button>
-
-                    </form>
-                    <!-- END: Standard Client Intake Form -->
-
-                </div>
-                <!-- END: Contact Form Card Wrapper -->
-
-            </div>
-            <!-- END: Contact Form Container -->
-        </section>
-        <!-- END: Interactive Advisor Contact Form Section -->
-
-    </main>
-    <!-- END: Main Support Portal Content Canvas -->
-
-
-    <!-- START: Platform Main Footer Section Wrapper -->
-    <footer class="site-footer">
-        <!-- START: Global Footer Layout Container -->
-        <div class="container" style="text-align: center;">
-            <p style="font-family: var(--font-display); letter-spacing: 0.05em; margin-bottom: 0.5rem;">
-                AURAVELVE STACK COMMUNICATIONS
-            </p>
-            <p style="font-size: 0.875rem; color: rgba(255, 255, 255, 0.7);">
-                &copy; 2026 AuraVelve. Built for Software Engineering Track Alignment.
-            </p>
-        </div>
-        <!-- END: Global Footer Layout Container -->
-    </footer>
-    <!-- END: Platform Main Footer Section Wrapper -->
-
-
-    <!-- START: Floating System Action Buttons -->
-    <button id="back-to-top" class="back-to-top" aria-label="Scroll to top of page">
-        ↑
-    </button>
-    <!-- END: Floating System Action Buttons -->
-
-
-    <!-- Core JavaScript Application Scripts Attachment -->
-    <script src="js/main.js"></script>
+  <!-- Our JavaScript file for this page.
+       "defer" makes sure the HTML loads first before the script runs.
+       This is the same validation.js file used on index.html, since
+       both pages share the same real-time form validation logic. -->
+  <script src="js/validation.js" defer></script>
 </body>
 </html>

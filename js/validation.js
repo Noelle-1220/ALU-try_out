@@ -28,6 +28,184 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var startQuizBtn = document.querySelector("#startQuizBtn");
 
+  /* --------------------------------------------------------
+     CONTACT FORM VALIDATION
+     This block handles the real-time validation for the
+     contact form on contact.html. It follows the exact same
+     pattern as the registration form above: check on input
+     and blur, toggle is-valid/is-invalid, show/hide error
+     messages, and only enable the Send button once every
+     field is valid. Wrapping it in "if (contactForm)" means
+     this code only runs on pages that actually have a
+     contact form, without stopping the registration form
+     code elsewhere in this file from running.
+     -------------------------------------------------------- */
+  var contactForm = document.querySelector("#contactForm");
+
+  if (contactForm) {
+
+    var contactNameInput = document.querySelector("#contactName");
+    var contactEmailInput = document.querySelector("#contactEmail");
+    var contactMessageInput = document.querySelector("#contactMessage");
+
+    var contactNameError = document.querySelector("#contactNameError");
+    var contactEmailError = document.querySelector("#contactEmailError");
+    var contactMessageError = document.querySelector("#contactMessageError");
+
+    var contactSubmitBtn = document.querySelector("#contactSubmitBtn");
+    var contactSuccessMessage = document.querySelector("#contactSuccessMessage");
+
+    /* Simple validation patterns for the contact form:
+         - Name: only letters and spaces, at least 2 characters
+         - Email: standard email format, any domain allowed
+         - Message: at least 10 characters so it is not left blank */
+    var contactNamePattern = /^[A-Za-z ]{2,50}$/;
+    var contactEmailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    var CONTACT_MESSAGE_MIN_LENGTH = 10;
+
+    /* Tracks whether each contact field is currently valid,
+       used to decide if the Send button should be enabled */
+    var contactFieldStatus = {
+      name: false,
+      email: false,
+      message: false
+    };
+
+    /* Marks a field as valid: green style, clears error text */
+    function markContactValid(inputElement, errorElement) {
+      inputElement.classList.add("is-valid");
+      inputElement.classList.remove("is-invalid");
+      errorElement.textContent = "";
+    }
+
+    /* Marks a field as invalid: red style, shows error text */
+    function markContactInvalid(inputElement, errorElement, message) {
+      inputElement.classList.add("is-invalid");
+      inputElement.classList.remove("is-valid");
+      errorElement.textContent = message;
+    }
+
+    /* Checks the Name field */
+    function validateContactName() {
+      var value = contactNameInput.value.trim();
+
+      if (value === "") {
+        markContactInvalid(contactNameInput, contactNameError, "Your name is required.");
+        contactFieldStatus.name = false;
+      } else if (!contactNamePattern.test(value)) {
+        markContactInvalid(contactNameInput, contactNameError, "Name can only contain letters and spaces.");
+        contactFieldStatus.name = false;
+      } else {
+        markContactValid(contactNameInput, contactNameError);
+        contactFieldStatus.name = true;
+      }
+    }
+
+    /* Checks the Email field */
+    function validateContactEmail() {
+      var value = contactEmailInput.value.trim();
+
+      if (value === "") {
+        markContactInvalid(contactEmailInput, contactEmailError, "Your email is required.");
+        contactFieldStatus.email = false;
+      } else if (!contactEmailPattern.test(value)) {
+        markContactInvalid(contactEmailInput, contactEmailError, "Please enter a valid email address.");
+        contactFieldStatus.email = false;
+      } else {
+        markContactValid(contactEmailInput, contactEmailError);
+        contactFieldStatus.email = true;
+      }
+    }
+
+    /* Checks the Message field */
+    function validateContactMessage() {
+      var value = contactMessageInput.value.trim();
+
+      if (value === "") {
+        markContactInvalid(contactMessageInput, contactMessageError, "A message is required.");
+        contactFieldStatus.message = false;
+      } else if (value.length < CONTACT_MESSAGE_MIN_LENGTH) {
+        markContactInvalid(contactMessageInput, contactMessageError, "Message must be at least " + CONTACT_MESSAGE_MIN_LENGTH + " characters long.");
+        contactFieldStatus.message = false;
+      } else {
+        markContactValid(contactMessageInput, contactMessageError);
+        contactFieldStatus.message = true;
+      }
+    }
+
+    /* Looks at all three contactFieldStatus values. If every
+       field is valid, the Send button is enabled. */
+    function checkContactFormValidity() {
+      if (contactFieldStatus.name === true && contactFieldStatus.email === true && contactFieldStatus.message === true) {
+        contactSubmitBtn.disabled = false;
+      } else {
+        contactSubmitBtn.disabled = true;
+      }
+    }
+
+    /* Attach input and blur listeners to each contact field so
+       feedback is instant while typing and double-checked when
+       the student clicks or tabs away from a field */
+    contactNameInput.addEventListener("input", function () {
+      validateContactName();
+      checkContactFormValidity();
+    });
+    contactNameInput.addEventListener("blur", function () {
+      validateContactName();
+      checkContactFormValidity();
+    });
+
+    contactEmailInput.addEventListener("input", function () {
+      validateContactEmail();
+      checkContactFormValidity();
+    });
+    contactEmailInput.addEventListener("blur", function () {
+      validateContactEmail();
+      checkContactFormValidity();
+    });
+
+    contactMessageInput.addEventListener("input", function () {
+      validateContactMessage();
+      checkContactFormValidity();
+    });
+    contactMessageInput.addEventListener("blur", function () {
+      validateContactMessage();
+      checkContactFormValidity();
+    });
+
+    /* Handles submitting the contact form. Since this project
+       has no backend server to send the message to, we simply
+       show a thank-you message and reset the form once every
+       field has passed validation. No alert boxes are used. */
+    contactForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      validateContactName();
+      validateContactEmail();
+      validateContactMessage();
+      checkContactFormValidity();
+
+      if (contactFieldStatus.name === false || contactFieldStatus.email === false || contactFieldStatus.message === false) {
+        return;
+      }
+
+      /* Show the thank-you message */
+      contactSuccessMessage.hidden = false;
+
+      /* Reset the form back to its empty starting state */
+      contactForm.reset();
+      contactSubmitBtn.disabled = true;
+
+      contactNameInput.classList.remove("is-valid");
+      contactEmailInput.classList.remove("is-valid");
+      contactMessageInput.classList.remove("is-valid");
+
+      contactFieldStatus.name = false;
+      contactFieldStatus.email = false;
+      contactFieldStatus.message = false;
+    });
+
+  }
   /* If this page does not have a registration form (for example
      if this script accidentally loads on another page), we stop
      here so the rest of the code does not throw errors. */
