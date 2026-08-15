@@ -279,8 +279,8 @@ document.addEventListener("DOMContentLoaded", function () {
       /* Use a closure-safe way of passing the option index into
          the click handler by attaching it as a local variable */
       optionButton.addEventListener("click", (function (optionIndex) {
-        return function () {
-          selectStandardOption(question, optionIndex, optionButton);
+        return function (event) {
+          selectStandardOption(question, optionIndex, event.currentTarget);
         };
       })(i));
 

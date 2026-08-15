@@ -51,6 +51,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  function getCanvasTextColor() {
+    if (document.body.classList.contains("dark-theme")) {
+      return "#FFFFFF";
+    } else {
+      return "#1A1A1A";
+    }
+  }
+
   var finalResults = loadFinalResults();
 
   /* If there is no saved result (for example, the student never
@@ -72,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { key: "machineLearning", label: "Machine Learning", color: "#3B82C4" }
   ];
 
-  var chartTopPadding = 40;
+  var chartTopPadding = 70;
   var chartBottomPadding = 60;
   var chartSidePadding = 50;
 
@@ -104,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
     /* Chart title */
-    ctx.fillStyle = "#1A1A1A";
+    ctx.fillStyle = getCanvasTextColor();
     ctx.font = "bold 18px Arial";
     ctx.textAlign = "center";
     ctx.fillText("Your Specialisation Score Breakdown", canvasWidth / 2, 25);
@@ -125,12 +133,12 @@ document.addEventListener("DOMContentLoaded", function () {
          stands out clearly from the other three */
       if (category.key === finalResults.topTrackKey) {
         ctx.lineWidth = 4;
-        ctx.strokeStyle = "#1A1A1A";
+        ctx.strokeStyle = getCanvasTextColor();
         ctx.strokeRect(barX, barY, barWidth, barHeight);
       }
 
       /* Value label shown above the bar */
-      ctx.fillStyle = "#1A1A1A";
+      ctx.fillStyle = getCanvasTextColor();
       ctx.font = "14px Arial";
       ctx.textAlign = "center";
       ctx.fillText(String(value), barX + (barWidth / 2), barY - 8);
