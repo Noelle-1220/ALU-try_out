@@ -9,11 +9,10 @@
 </head>
 <body>
 
-  <!-- ==========================================
+  <!-- 
        HEADER & NAVIGATION
-       This bar stays at the top of the page (sticky)
-       and holds the logo, nav links, and theme toggle.
-       ========================================== -->
+       this section contains the header and navigation elements -->
+
   <header class="site-header">
     <div class="header-inner">
       <div class="site-logo">Aura <span>Velve</span></div>
@@ -70,11 +69,10 @@
       </p>
     </section>
 
-    <!-- ==========================================
+    <!-- 
          SPECIALISATION OVERVIEW (ACCORDION CARDS)
-         Each card can expand/collapse to show more
-         detail. JS toggles the "is-open" class.
-         ========================================== -->
+         this section contains the accordion cards for each specialisation track -->
+
     <section class="container" style="margin-bottom: var(--space-xl);">
       <h2 style="text-align:center; margin-bottom: var(--space-lg);">The Four Specialisation Tracks</h2>
 
@@ -147,18 +145,15 @@
       </div>
     </section>
 
-    <!-- ==========================================
+    <!-- 
          REGISTRATION FORM
-         Students must fill this in correctly before
-         the "Start Quiz" button becomes clickable.
-         validation.js controls all the checking logic.
-         ========================================== -->
+         this section contains the registration form for new users -->
+
     <section class="container" style="max-width: 550px; margin-bottom: var(--space-xl);">
       <div class="card">
         <h2 style="text-align:center; margin-bottom: var(--space-md);">Register to Begin</h2>
 
-        <!-- We use novalidate so the browser's built-in popups
-             do not appear. Our own JS handles all validation. -->
+        <!-- Registration form for new users -->
         <form id="registrationForm" novalidate>
 
           <!-- Student Name field: letters and spaces only -->
@@ -168,7 +163,7 @@
               type="text"
               id="studentName"
               name="studentName"
-              placeholder="e.g. Jane Doe"
+              placeholder="e.g. Noelle Ingabire"
               autocomplete="off"
             >
             <small class="error-message" id="studentNameError"></small>
@@ -194,14 +189,13 @@
               type="text"
               id="studentEmail"
               name="studentEmail"
-              placeholder="e.g. jane.doe@alueducation.com"
+              placeholder="e.g. n.ingabire@alueducation.com"
               autocomplete="off"
             >
             <small class="error-message" id="studentEmailError"></small>
           </div>
 
-          <!-- CTA button: disabled by default. JS enables it
-               only once every field above is valid. -->
+          <!-- Start Quiz button -->
           <button type="submit" id="startQuizBtn" class="btn-primary magnetic-btn" style="width:100%;" disabled>
             Start Quiz
           </button>
@@ -211,9 +205,10 @@
 
   </main>
 
-  <!-- ==========================================
+  <!-- 
        FOOTER
-       ========================================== -->
+       this section contains the footer content for the page -->
+
   <footer class="site-footer">
     <p>&copy; 2026 BSE Specialisation Advisor. Built for the ALU Software Engineering programme.</p>
   </footer>
@@ -221,7 +216,7 @@
   <!-- Back to top floating button, hidden until the user scrolls -->
   <button id="backToTopFab" class="back-to-top-fab" aria-label="Back to top">↑</button>
 
-  <!-- Our JavaScript file for this page.
+  <!-- the JavaScript files needed for this page to run.
        "defer" makes sure the HTML loads first before the script runs. -->
        
   <script src="js/main.js" defer></script>     

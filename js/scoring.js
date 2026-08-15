@@ -1,39 +1,18 @@
-/* ==========================================================
+/* 
    SCORING.JS
    This file runs on results.html. It reads the raw answers
    that quiz-engine.js saved to localStorage, works out how
-   many points each specialisation track earned (including a
-   bonus for fast, non-timed-out answers in a row), decides
-   which track scored the highest, and then shows all of this
-   on the page after a short simulated "calculating" preloader.
-
-   HTML ELEMENTS THIS FILE EXPECTS ON results.html:
-   #resultsPageRoot        - wraps the whole results section (used
-                              as a guard so this script only runs
-                              on the results page)
-   #preloaderScreen         - the "calculating your result" overlay
-   #resultsContent          - the container revealed once loading ends
-   #noResultsMessage        - shown instead if no quiz data is found
-   #topTrackName            - heading showing the winning track name
-   #topTrackDescription     - paragraph with next-step guidance
-   #scoreLowLevel           - number display for Low-Level Programming
-   #scoreArVr               - number display for AR/VR
-   #scoreFullStack          - number display for Full-Stack Web Dev
-   #scoreMachineLearning    - number display for Machine Learning
-   #streakBonusDisplay      - text showing the longest fast-answer streak
-   #speedBonusDisplay       - text showing total bonus points earned
-   ========================================================== */
+   many points each specialisation track earned. */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* --------------------------------------------------------
-     1. GRAB THE ELEMENTS WE NEED FROM THE PAGE
-     -------------------------------------------------------- */
+  /* 
+     1. GRAB ELEMENTS NEEDED 
+     this section handles grabbing the necessary DOM elements */
+
   var resultsPageRoot = document.querySelector("#resultsPageRoot");
 
-  /* If this page does not have the results root element, this
-     script must have loaded on the wrong page, so we stop
-     here to avoid errors. */
+  /* if the page doesn't have the results root ement, it will stop here*/
   if (!resultsPageRoot) {
     return;
   }
@@ -53,11 +32,11 @@ document.addEventListener("DOMContentLoaded", function () {
   var streakBonusDisplay = document.querySelector("#streakBonusDisplay");
   var speedBonusDisplay = document.querySelector("#speedBonusDisplay");
 
-  /* --------------------------------------------------------
+  /* 
      2. TRACK INFORMATION
-     Holds the friendly display name and the "what to do next"
-     guidance text for each of the four specialisation tracks.
-     -------------------------------------------------------- */
+     this section defines the information for each specialisation track
+      */
+     
   var trackInfo = {
     lowLevel: {
       name: "Low-Level Programming",
@@ -77,13 +56,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  /* The four category keys, listed once here so every function
-     below can loop over them the same way. */
+  /* list of specialization tracks in order */
   var categoryKeys = ["lowLevel", "arVr", "fullStack", "machineLearning"];
 
-  /* --------------------------------------------------------
+  /* 
      3. LOAD THE RAW QUIZ DATA SAVED BY QUIZ-ENGINE.JS
-     -------------------------------------------------------- */
+     this section handles loading the quiz results from localStorage */
+
   function loadRawQuizResults() {
     var savedText = localStorage.getItem("bseQuizResults");
 
@@ -91,8 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return null;
     }
 
-    /* JSON.parse can throw an error if the saved text is broken,
-       so we wrap it in a try/catch to stay safe. */
+    /* when JSON,parse fails */
     try {
       var parsedData = JSON.parse(savedText);
       return parsedData;
@@ -101,16 +79,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* --------------------------------------------------------
+  /* 
      4. CALCULATE THE FINAL SCORES
-     This is the main "scoring breakdown engine". It loops
-     through every answer once and:
-       - adds that answer's points into the four running totals
-       - tracks a "streak" of fast, non-timed-out answers in a row
-       - gives a small bonus multiplier that grows with the streak
-     A fast answer is one where the student answered using half
-     the time limit or less. A timeout always breaks the streak.
-     -------------------------------------------------------- */
+     This section calculates the final scores based on the quiz results */
+
   function calculateFinalScores(quizData) {
     var totals = { lowLevel: 0, arVr: 0, fullStack: 0, machineLearning: 0 };
     var currentStreak = 0;
@@ -137,13 +109,10 @@ document.addEventListener("DOMContentLoaded", function () {
         currentStreak = 0;
       }
 
-      /* Every fast answer in a row adds another 10% bonus,
-         capped at 5 in a row (a maximum of +50%) so the bonus
-         cannot grow without limit. */
+      /* Calculate the bonus multiplier based on the current streak */
       var streakMultiplier = 1 + (Math.min(currentStreak, 5) * 0.1);
 
-      /* Add this answer's points into the four totals, scaled
-         up by the streak multiplier worked out above */
+      /* add the adjusted points to the appropriate category total */
       for (var k = 0; k < categoryKeys.length; k++) {
         var key = categoryKeys[k];
         var rawPoints = answer.points[key];
@@ -154,8 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    /* Round every total and the bonus figure to one decimal
-       place so the numbers displayed on screen look clean */
+    /* Round every total and the bonus figure to one decimal place */
     for (var m = 0; m < categoryKeys.length; m++) {
       var roundKey = categoryKeys[m];
       totals[roundKey] = Math.round(totals[roundKey] * 10) / 10;
@@ -178,19 +146,18 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 
-  /* --------------------------------------------------------
+  /* 
      5. SAVE THE FINAL RESULT
-     Stores the finished calculation in localStorage so the
-     canvas graph on this same page (built by canvas-charts.js)
-     can read the same numbers without recalculating them.
-     -------------------------------------------------------- */
+     this section stores the finished calculation in localStorage */
+
   function saveFinalResults(finalResults) {
     localStorage.setItem("bseFinalResults", JSON.stringify(finalResults));
   }
 
-  /* --------------------------------------------------------
+  /* 
      6. DISPLAY THE RESULTS ON THE PAGE
-     -------------------------------------------------------- */
+     this section displays the calculated results on the webpage */
+
   function displayResultsOnPage(finalResults) {
     var topTrack = trackInfo[finalResults.topTrackKey];
 
@@ -206,11 +173,10 @@ document.addEventListener("DOMContentLoaded", function () {
     speedBonusDisplay.textContent = "Bonus points earned from quick answers: " + finalResults.totalBonusPoints;
   }
 
-  /* --------------------------------------------------------
-     7. SHOW THE "NO RESULTS FOUND" MESSAGE
-     Runs if a visitor opens results.html without ever taking
-     the quiz, so the page does not just look broken.
-     -------------------------------------------------------- */
+  /* 
+     7. "NO RESULTS FOUND" MESSAGE
+     runs when the user has not taken the quiz */
+     
   function showNoResultsMessage() {
     if (preloaderScreen) {
       preloaderScreen.classList.add("preloader-hidden");
@@ -223,12 +189,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* --------------------------------------------------------
-     8. RUN THE PRELOADER, THEN REVEAL THE RESULTS
-     Keeps the preloader screen visible for a couple of
-     seconds (simulating a calculation) before switching over
-     to the finished results view.
-     -------------------------------------------------------- */
+  /* 
+     8. RUN THE RESULTS PRELOADER & SHOW RESULTS
+     this section simulates a calculation by keeping the preloader visible for a few seconds before showing the results */
+
   function runPreloaderThenShowResults(finalResults) {
     var PRELOADER_DELAY_MS = 2500;
 
@@ -243,9 +207,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }, PRELOADER_DELAY_MS);
   }
 
-  /* --------------------------------------------------------
-     9. MAIN STARTING POINT FOR THIS SCRIPT
-     -------------------------------------------------------- */
+  /*
+     9. STARTING POINT FOR THIS SCRIPT
+     this is where the script begins execution for the scoring logic */
+
   var rawQuizData = loadRawQuizResults();
 
   if (!rawQuizData || !rawQuizData.answers || rawQuizData.answers.length === 0) {

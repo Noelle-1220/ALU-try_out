@@ -9,11 +9,10 @@
 </head>
 <body>
 
-  <!-- ==========================================
+  <!-- 
        HEADER & NAVIGATION
-       Same header as the other pages so the site
-       feels consistent as the student moves around.
-       ========================================== -->
+       this section contains the header and navigation for the page -->
+
   <header class="site-header">
     <div class="header-inner">
       <div class="site-logo">Aura <span>Velve</span></div>
@@ -54,36 +53,26 @@
     </ul>
   </div>
 
-  <!-- ==========================================
+  <!-- 
        MAIN PAGE CONTENT
-       Everything results-related sits inside
-       #resultsPageRoot. scoring.js checks for this
-       element first, so it knows it is safe to run
-       on this page.
-       ========================================== -->
+       this section contains the main content for the page -->
+
   <main>
     <div id="resultsPageRoot">
 
-      <!-- ==========================================
+      <!-- 
            PRELOADER SCREEN
            Covers the whole page while scoring.js
-           "calculates" the result. scoring.js hides
-           this element once it is done working out
-           the scores.
-           ========================================== -->
+           "calculates" the result. -->
       <div id="preloaderScreen" class="preloader-screen">
         <div class="preloader-logo">BSE <span>Advisor</span></div>
         <div class="preloader-spinner"></div>
         <p>Calculating your specialisation result&hellip;</p>
       </div>
 
-      <!-- ==========================================
+      <!-- 
            NO RESULTS MESSAGE
-           Only shown if a visitor opens this page
-           without ever completing the quiz, so the
-           page still makes sense instead of showing
-           empty boxes. Hidden by default.
-           ========================================== -->
+           this section is shown when no quiz results are available -->
       <section class="container" id="noResultsMessage" style="max-width:600px; text-align:center; padding-top: var(--space-xl);" hidden>
         <h1 style="margin-bottom: var(--space-sm);">No Quiz Results Found</h1>
         <p>
@@ -97,12 +86,9 @@
         </a>
       </section>
 
-      <!-- ==========================================
+      <!-- 
            RESULTS CONTENT
-           Hidden by default. scoring.js reveals this
-           section and fills in every value inside it
-           once the preloader delay is finished.
-           ========================================== -->
+           this section contains the results content for the page -->
       <section class="container" id="resultsContent" style="max-width:750px; padding-top: var(--space-lg); padding-bottom: var(--space-xl);" hidden>
 
         <!-- OUTCOME REVEAL -->
@@ -143,12 +129,9 @@
           <p id="speedBonusDisplay">Bonus points earned from quick answers: 0</p>
         </div>
 
-        <!-- ==========================================
+        <!-- 
              CANVAS GRAPH
-             canvas-charts.js draws the bar/radar chart
-             (and the particle/confetti animation) onto
-             this canvas once the results are ready.
-             ========================================== -->
+             this section contains the canvas element for the results chart -->
         <div class="canvas-chart-wrapper">
           <canvas id="resultsCanvas" width="700" height="400">
             Your browser does not support the canvas element, so the
@@ -171,9 +154,10 @@
     </div>
   </main>
 
-  <!-- ==========================================
+  <!-- 
        FOOTER
-       ========================================== -->
+       this section contains the footer content for the page -->
+
   <footer class="site-footer">
     <p>&copy; 2026 BSE Specialisation Advisor. Built for the ALU Software Engineering programme.</p>
   </footer>
@@ -181,10 +165,9 @@
   <!-- Back to top floating button, hidden until the user scrolls -->
   <button id="backToTopFab" class="back-to-top-fab" aria-label="Back to top">↑</button>
 
-  <!-- Our JavaScript files for this page.
+  <!-- the JavaScript files needed for this page to run.
        "defer" makes sure the HTML loads first before either
-       script runs. scoring.js is listed first because
-       canvas-charts.js depends on the numbers it calculates. -->
+       script runs. -->
   <script src="js/main.js" defer></script>     
   <script src="js/scoring.js" defer></script>
   <script src="js/canvas-charts.js" defer></script>

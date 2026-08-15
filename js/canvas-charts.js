@@ -1,31 +1,25 @@
-/* ==========================================================
+/*
    CANVAS-CHARTS.JS
-   This file runs on results.html. It reads the final scored
-   results that scoring.js already saved to localStorage, then
-   draws a simple bar chart of the four specialisation scores
-   straight onto the HTML5 canvas using the Canvas 2D API. It
-   also plays a short confetti particle animation to celebrate
-   the student's result. No chart libraries are used, only the
-   built-in canvas drawing functions.
-   ========================================================== */
+   This file runs on results.html. It draws a bar chart showing the
+   student's scores in each of the four specialisation tracks. 
+   */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* --------------------------------------------------------
+  /* 
      1. GRAB THE CANVAS AND ITS DRAWING CONTEXT
-     -------------------------------------------------------- */
+     this section gets the canvas element and its 2D drawing context */
+
   var resultsCanvas = document.querySelector("#resultsCanvas");
 
-  /* If this page does not have the results canvas, this script
-     must have loaded on the wrong page, so we stop here. */
+  /* for when the canvas is not found */
   if (!resultsCanvas) {
     return;
   }
 
   var ctx = resultsCanvas.getContext("2d");
 
-  /* Some very old browsers do not support canvas at all, so we
-     check that we actually got a drawing context back. */
+  /* if the version does not support canvas */
   if (!ctx) {
     return;
   }
@@ -33,9 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
   var canvasWidth = resultsCanvas.width;
   var canvasHeight = resultsCanvas.height;
 
-  /* --------------------------------------------------------
+  /* 
      2. LOAD THE FINAL SCORES SAVED BY SCORING.JS
-     -------------------------------------------------------- */
+     this section loads the final scores from localStorage */
+
   function loadFinalResults() {
     var savedText = localStorage.getItem("bseFinalResults");
 
@@ -61,18 +56,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var finalResults = loadFinalResults();
 
-  /* If there is no saved result (for example, the student never
-     took the quiz), there is nothing to draw, so we stop here. */
+  /* when no final results are saved, this script makes sure to stop */
   if (!finalResults || !finalResults.totals) {
     return;
   }
 
-  /* --------------------------------------------------------
+  /* 
      3. CHART SETUP
-     Holds the label and bar colour for each of the four
-     specialisation tracks, plus the layout numbers used to
-     position everything on the canvas.
-     -------------------------------------------------------- */
+     this section sets up the chart dimensions and data */
+
   var categoryData = [
     { key: "lowLevel", label: "Low-Level", color: "#0D2B45" },
     { key: "arVr", label: "AR/VR", color: "#D4AF37" },
@@ -91,8 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var barWidth = (drawableWidth - (barGap * (categoryData.length - 1))) / categoryData.length;
 
   /* Work out the tallest score so every bar can be scaled to
-     fit inside the canvas. A minimum of 10 is used so the
-     chart does not look strange if every score is very low. */
+     fit inside the canvas. */
   var maxScore = 10;
   for (var i = 0; i < categoryData.length; i++) {
     var scoreValue = finalResults.totals[categoryData[i].key];
@@ -101,13 +92,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* --------------------------------------------------------
+  /*
      4. DRAW THE BAR CHART
-     Clears the canvas and redraws the title, all four bars,
-     their value labels, and their category labels. This
-     function is called every animation frame so the confetti
-     always has a freshly drawn chart underneath it.
-     -------------------------------------------------------- */
+     this function draws the bar chart on the canvas */
+
   function drawBarChart() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -148,12 +136,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* --------------------------------------------------------
+  /* 
      5. CONFETTI PARTICLE SETUP
-     Builds a list of small squares that will fall down the
-     canvas like confetti, each with its own position, speed,
-     colour, and rotation.
-     -------------------------------------------------------- */
+     this section sets up the confetti particles that will fall down over the chart
+      */
+
   var confettiColors = ["#0D2B45", "#D4AF37", "#0D7A5C", "#3B82C4"];
   var confettiParticles = [];
   var totalConfettiParticles = 60;
@@ -190,9 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* Moves every particle down and sideways a little, spins it,
-     and sends it back to the top once it falls off the bottom
-     so the confetti keeps flowing for the whole animation */
+  /* this function updates the position and rotation of each confetti particle */
   function updateConfettiParticles() {
     for (var i = 0; i < confettiParticles.length; i++) {
       var particle = confettiParticles[i];
@@ -208,13 +193,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* --------------------------------------------------------
+  /* 
      6. RUN THE ANIMATION
-     Uses requestAnimationFrame to redraw the chart and the
-     confetti roughly 60 times a second. The animation runs
-     for a fixed number of frames (about 3-4 seconds) and then
-     stops, leaving a clean, finished bar chart on screen.
-     -------------------------------------------------------- */
+     this section runs the animation loop that draws the chart and confetti particles frame by frame
+      */
+
   var totalAnimationFrames = 200;
   var currentFrame = 0;
 
@@ -228,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (currentFrame < totalAnimationFrames) {
       requestAnimationFrame(animateConfetti);
     } else {
-      /* Animation is finished: draw the chart one last time
+      /* draws the chart one last time
          on its own so the confetti does not just cut off mid-fall */
       drawBarChart();
     }

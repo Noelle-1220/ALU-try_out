@@ -1,21 +1,16 @@
-/* ==========================================================
+/* 
    VALIDATION.JS
    This file controls the real-time validation for the
-   registration form on index.html. It checks the Student
-   Name, Student ID, and Institutional Email fields as the
-   user types, shows/hides error messages, and only enables
-   the "Start Quiz" button once every field is valid.
-   ========================================================== */
+   registration form on index.html.*/
 
-/* We wrap everything inside DOMContentLoaded so the script
-   only runs once the whole HTML page has been loaded. This
-   stops errors caused by trying to grab elements that do
-   not exist yet. */
+
+/* DOMCONTENTLOADED */
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* --------------------------------------------------------
+  /* 
      1. GRAB THE ELEMENTS WE NEED FROM THE PAGE
-     -------------------------------------------------------- */
+     this section grabs all the necessary elements from the DOM */
+
   var registrationForm = document.querySelector("#registrationForm");
 
   var nameInput = document.querySelector("#studentName");
@@ -28,18 +23,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var startQuizBtn = document.querySelector("#startQuizBtn");
 
-  /* --------------------------------------------------------
+  /* 
      CONTACT FORM VALIDATION
-     This block handles the real-time validation for the
-     contact form on contact.html. It follows the exact same
-     pattern as the registration form above: check on input
-     and blur, toggle is-valid/is-invalid, show/hide error
-     messages, and only enable the Send button once every
-     field is valid. Wrapping it in "if (contactForm)" means
-     this code only runs on pages that actually have a
-     contact form, without stopping the registration form
-     code elsewhere in this file from running.
-     -------------------------------------------------------- */
+     This section handles the real-time validation for the
+     contact form on contact.html. */
+
   var contactForm = document.querySelector("#contactForm");
 
   if (contactForm) {
@@ -55,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var contactSubmitBtn = document.querySelector("#contactSubmitBtn");
     var contactSuccessMessage = document.querySelector("#contactSuccessMessage");
 
-    /* Simple validation patterns for the contact form:
+    /* validation patterns for the contact form:
          - Name: only letters and spaces, at least 2 characters
          - Email: standard email format, any domain allowed
          - Message: at least 10 characters so it is not left blank */
@@ -63,22 +51,21 @@ document.addEventListener("DOMContentLoaded", function () {
     var contactEmailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     var CONTACT_MESSAGE_MIN_LENGTH = 10;
 
-    /* Tracks whether each contact field is currently valid,
-       used to decide if the Send button should be enabled */
+    /* tracks each field inserted to facilitate validation and send approval */
     var contactFieldStatus = {
       name: false,
       email: false,
       message: false
     };
 
-    /* Marks a field as valid: green style, clears error text */
+    /* Marks a field as valid: green style */
     function markContactValid(inputElement, errorElement) {
       inputElement.classList.add("is-valid");
       inputElement.classList.remove("is-invalid");
       errorElement.textContent = "";
     }
 
-    /* Marks a field as invalid: red style, shows error text */
+    /* Marks a field as invalid: red style */
     function markContactInvalid(inputElement, errorElement, message) {
       inputElement.classList.add("is-invalid");
       inputElement.classList.remove("is-valid");
@@ -143,9 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    /* Attach input and blur listeners to each contact field so
-       feedback is instant while typing and double-checked when
-       the student clicks or tabs away from a field */
+    /* enables smooth validation feedback though event listeners */
     contactNameInput.addEventListener("input", function () {
       validateContactName();
       checkContactFormValidity();
@@ -173,10 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
       checkContactFormValidity();
     });
 
-    /* Handles submitting the contact form. Since this project
-       has no backend server to send the message to, we simply
-       show a thank-you message and reset the form once every
-       field has passed validation. No alert boxes are used. */
+    /* Handles submitting the contact form. */
     contactForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
@@ -206,41 +188,35 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
   }
-  /* If this page does not have a registration form (for example
-     if this script accidentally loads on another page), we stop
-     here so the rest of the code does not throw errors. */
+  /* If no registration form is found, stop here */
   if (!registrationForm) {
     return;
   }
 
-  /* --------------------------------------------------------
-     2. SIMPLE VALIDATION PATTERNS
-     We keep these as plain regular expressions so they are
-     easy to read and explain:
+  /* 
+     2. REGISTRATION VALIDATION PATTERNS
+      This section defines the patterns used to validate the registration form.
        - Name: only letters and spaces, at least 2 characters
        - Student ID: only letters and numbers, 6-15 characters
        - Email: standard email format ending in @alueducation.com
-     -------------------------------------------------------- */
+      */
+
   var namePattern = /^[A-Za-z ]{2,50}$/;
   var idPattern = /^[A-Za-z0-9]{6,15}$/;
   var emailPattern = /^[A-Za-z0-9._%+-]+@alueducation\.com$/;
 
-  /* This object keeps track of whether each field is currently
-     valid. We use it to decide if the Start Quiz button should
-     be enabled. Starting values are false because the form is
-     empty when the page first loads. */
+  /* this object keeps track of whether each field is currently valid */
   var fieldStatus = {
     name: false,
     id: false,
     email: false
   };
 
-  /* --------------------------------------------------------
+  /* 
      3. HELPER FUNCTIONS
-     These two small helpers keep our validation functions
-     short. One marks a field as valid, the other marks a
-     field as invalid with a message.
-     -------------------------------------------------------- */
+     this section contains small utility functions used by the validation logic
+      */
+
   function markValid(inputElement, errorElement) {
     inputElement.classList.add("is-valid");
     inputElement.classList.remove("is-invalid");
@@ -253,12 +229,11 @@ document.addEventListener("DOMContentLoaded", function () {
     errorElement.textContent = message;
   }
 
-  /* --------------------------------------------------------
+  /* 
      4. VALIDATE STUDENT NAME
-     Checks that the name only contains letters and spaces,
-     and is not empty. Updates the styling and error text,
-     then updates fieldStatus.name.
-     -------------------------------------------------------- */
+    this section contains the logic for validating the student name field
+     */
+
   function validateName() {
     var value = nameInput.value.trim();
 
@@ -274,12 +249,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* --------------------------------------------------------
+  /* 
      5. VALIDATE STUDENT ID
-     Checks that the ID only contains letters and numbers and
-     is a reasonable length. Updates styling, error text, and
-     fieldStatus.id.
-     -------------------------------------------------------- */
+     this section contains the logic for validating the student ID field
+     */
+
   function validateId() {
     var value = idInput.value.trim();
 
@@ -295,12 +269,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* --------------------------------------------------------
+  /* 
      6. VALIDATE INSTITUTIONAL EMAIL
-     Checks that the email is in a valid format AND ends with
-     the required @alueducation.com domain. Updates styling,
-     error text, and fieldStatus.email.
-     -------------------------------------------------------- */
+     this section contains the logic for validating the institutional email field
+     */
+
   function validateEmail() {
     var value = emailInput.value.trim();
 
@@ -316,12 +289,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* --------------------------------------------------------
+  /* 
      7. CHECK OVERALL FORM VALIDITY
-     Looks at all three fieldStatus values. If every field is
-     true, the Start Quiz button is enabled. Otherwise it stays
-     disabled. This runs after every single field check.
-     -------------------------------------------------------- */
+     this section checks if all form fields are valid and enables/disables the submit button accordingly
+     */
+
   function checkFormValidity() {
     if (fieldStatus.name === true && fieldStatus.id === true && fieldStatus.email === true) {
       startQuizBtn.disabled = false;
@@ -330,13 +302,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* --------------------------------------------------------
+  /* 
      8. ATTACH EVENT LISTENERS
-     We listen for "input" (fires on every keystroke) so the
-     feedback feels instant, and "blur" (fires when the user
-     clicks/tabs away) as a backup check. After each check we
-     re-run checkFormValidity() to update the button.
-     -------------------------------------------------------- */
+     this section attaches event listeners to the form fields to trigger validation on user interaction
+     */
+
   nameInput.addEventListener("input", function () {
     validateName();
     checkFormValidity();
@@ -364,17 +334,11 @@ document.addEventListener("DOMContentLoaded", function () {
     checkFormValidity();
   });
 
-  /* --------------------------------------------------------
+  /* 
      9. HANDLE FORM SUBMISSION
-     Even though the button is disabled until the form is
-     valid, we still run one final check on submit. This is a
-     safety net in case something unexpected happens (for
-     example, the button being enabled by browser dev tools).
-     If everything is valid, the student's details are saved
-     to localStorage so later pages (like quiz.html) could use
-     them, and the browser is allowed to move to quiz.html.
-     No alert boxes are used anywhere in this process.
-     -------------------------------------------------------- */
+     this section handles the form submission event
+     */
+
   registrationForm.addEventListener("submit", function (event) {
     validateName();
     validateId();
@@ -387,12 +351,10 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    /* Stop the default page reload so we can control navigation
-       ourselves after saving the student's details. */
+    /* stops default reload to manage the navigation */
     event.preventDefault();
 
-    /* Save the student's registration details so other pages
-       in the site can greet them by name or reference their ID. */
+    /* Store the student's details in localStorage for full page reference */
     var studentDetails = {
       name: nameInput.value.trim(),
       id: idInput.value.trim(),

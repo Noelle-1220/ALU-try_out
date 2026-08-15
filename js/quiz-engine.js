@@ -1,24 +1,18 @@
-/* ==========================================================
+/* 
    QUIZ-ENGINE.JS
-   This file runs the interactive quiz on quiz.html. It shows
-   one question at a time, runs a countdown timer for each
-   question, lets the student pick an answer (either a normal
-   button, a campus hotspot marker, or after watching/listening
-   to some media), tracks their progress, and finally saves
-   everything to localStorage so the results page can work out
-   the scoring.
-   ========================================================== */
+   This file runs the interactive quiz on quiz.html.
+   */
+
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* --------------------------------------------------------
-     1. GRAB THE ELEMENTS WE NEED FROM THE PAGE
-     -------------------------------------------------------- */
+  /* 
+     1. GRAB ELEMENTS 
+     this section grabs all the necessary elements from the HTML page */
+
   var quizQuestionText = document.querySelector("#quizQuestionText");
 
-  /* If this page does not have the quiz question box, this
-     script must have loaded on the wrong page, so we stop
-     here to avoid errors. */
+  /* if there is no quiz question text element, stop here */
   if (!quizQuestionText) {
     return;
   }
@@ -46,15 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
   var nextQuestionBtn = document.querySelector("#nextQuestionBtn");
   var submitQuizBtn = document.querySelector("#submitQuizBtn");
 
-  /* --------------------------------------------------------
+  /* 
      2. QUIZ QUESTION DATA
-     Each question has a "media" type ("none", "hotspot",
-     "audio", or "video") and either a list of "options" (each
-     with a points object) or, for hotspot questions, a
-     "hotspotPoints" object that maps each marker's ID to a
-     points object. Points are added to four running totals:
-     lowLevel, arVr, fullStack, and machineLearning.
-     -------------------------------------------------------- */
+     this section defines the quiz questions and their associated data */
+
   var quizQuestions = [
     {
       text: "Which activity sounds most enjoyable to you?",
@@ -159,30 +148,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var totalQuestions = quizQuestions.length;
 
-  /* --------------------------------------------------------
+  /* 
      3. QUIZ STATE
-     currentQuestionIndex tracks which question is on screen.
-     studentAnswers stores one entry per question, filled in
-     as the student answers (or times out). countdownTimerId
-     holds the setInterval reference so we can stop it.
-     -------------------------------------------------------- */
+     this section defines the state variables for the quiz */
+
   var currentQuestionIndex = 0;
   var studentAnswers = new Array(totalQuestions).fill(null);
   var countdownTimerId = null;
   var secondsRemaining = 0;
   var QUESTION_TIME_LIMIT = 120; /* seconds allowed per question */
 
-  /* Keeps track of which video pause-timestamps have already
-     been used, so the video does not pause twice at the same
-     spot if the student rewinds past it. Reset per question. */
+  /* keeps track on pause timestamps and smooth replay */
   var videoTimestampsUsed = [];
 
-  /* --------------------------------------------------------
-     4. SMALL HELPER FUNCTIONS
-     -------------------------------------------------------- */
+  /* 
+     4. HELPER FUNCTIONS
+     this section contains small utility functions used throughout the quiz */
 
-  /* Turns a number of seconds into a "M:SS" style string,
-     used for both the question timer and the audio player. */
+  /* Formats a number of seconds into a "M:SS" style string */
   function formatTime(totalSeconds) {
     var minutes = Math.floor(totalSeconds / 60);
     var seconds = Math.floor(totalSeconds % 60);
@@ -190,9 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return minutes + ":" + secondsText;
   }
 
-  /* Disables every answer control on the current question,
-     used both when the timer hits zero and when reviewing an
-     already-timed-out question. */
+  /* Disables all answer controls on the current question */
   function lockAllAnswerControls() {
     var optionButtons = quizOptionsList.querySelectorAll(".quiz-option-btn");
     for (var i = 0; i < optionButtons.length; i++) {
@@ -203,9 +184,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* --------------------------------------------------------
+  /* 
      5. TIMER FUNCTIONS
-     -------------------------------------------------------- */
+     this section contains functions for managing the quiz timer */
+
   function stopTimer() {
     if (countdownTimerId !== null) {
       clearInterval(countdownTimerId);
@@ -242,10 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1000);
   }
 
-  /* Runs automatically when the countdown reaches zero. If the
-     student had not answered yet, we record a blank answer,
-     lock the controls, show the "time is up" message, and
-     move on (or submit) after a short pause. */
+  /* Handles the action when the timer runs out */
   function handleTimeUp() {
     stopTimer();
     timeUpMessage.textContent = "Time is up for this question! Moving on automatically\u2026";
@@ -270,9 +249,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1500);
   }
 
-  /* --------------------------------------------------------
+  /* 
      6. BUILDING THE ANSWER OPTIONS
-     -------------------------------------------------------- */
+     this section contains functions for creating the answer buttons for each question */
+
   function buildOptionButtons(question) {
     /* Clear out any buttons left over from the last question */
     quizOptionsList.innerHTML = "";
@@ -296,7 +276,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* Runs when the student clicks a normal answer button */
+  /* Runs when the student clicks their chosen answer button */
   function selectStandardOption(question, optionIndex, clickedButton) {
     var timeTaken = QUESTION_TIME_LIMIT - secondsRemaining;
 
@@ -309,7 +289,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     /* Visually highlight the chosen button and un-highlight
-       every other button in this question */
+       every other button of that question */
     var allButtons = quizOptionsList.querySelectorAll(".quiz-option-btn");
     for (var i = 0; i < allButtons.length; i++) {
       allButtons[i].classList.remove("option-selected");
@@ -329,21 +309,18 @@ document.addEventListener("DOMContentLoaded", function () {
       wasTimeout: false
     };
 
-    /* Visually highlight the chosen marker using a simple style
-       change (a thicker gold border) instead of a new CSS class */
+    /* Visually highlight the chosen marker */
     for (var i = 0; i < hotspotMarkers.length; i++) {
       hotspotMarkers[i].style.outline = "none";
     }
     clickedMarker.style.outline = "3px solid var(--text-heading)";
   }
 
-  /* --------------------------------------------------------
+  /* 
      7. MEDIA BLOCK SETUP (hotspot / audio / video)
-     -------------------------------------------------------- */
+     this section contains functions for managing the media blocks */
 
-  /* Every hotspot marker gets its click listener once, since
-     the markers themselves never get rebuilt between
-     questions (only the question data behind them changes). */
+  /* Attach click event listeners to each hotspot marker */
   for (var m = 0; m < hotspotMarkers.length; m++) {
     hotspotMarkers[m].addEventListener("click", function (event) {
       var marker = event.currentTarget;
@@ -353,15 +330,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* Resets and hides all three media blocks. loadQuestion()
-     calls this first, then un-hides only the one it needs. */
+  /* Hides all media blocks */
   function hideAllMediaBlocks() {
     hotspotMediaBlock.hidden = true;
     audioMediaBlock.hidden = true;
     videoMediaBlock.hidden = true;
 
-    /* Stop any audio/video from playing in the background once
-       the student moves to a different question */
+    /* Reset audio player */
     quizAudioElement.pause();
     quizAudioElement.currentTime = 0;
     audioPlayBtn.innerHTML = "&#9654;";
@@ -378,7 +353,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* --- Custom audio player controls --- */
+  /*  Custom audio player controls  */
   audioPlayBtn.addEventListener("click", function () {
     if (quizAudioElement.paused) {
       quizAudioElement.play();
@@ -411,7 +386,7 @@ document.addEventListener("DOMContentLoaded", function () {
     audioPlayBtn.innerHTML = "&#9654;";
   });
 
-  /* --- Video scenario auto-pause at set timestamps --- */
+  /*  Video scenario auto-pause at set timestamps  */
   quizVideoElement.addEventListener("timeupdate", function () {
     for (var i = 0; i < videoTimestampsUsed.length; i++) {
       var stampSeconds = videoTimestampsUsed[i].time;
@@ -423,9 +398,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  /* Reads the data-pause-timestamps attribute from the video
-     element (a comma separated list of seconds) and rebuilds
-     the videoTimestampsUsed tracking array for a fresh question. */
+  /*  Sets up the video timestamps for the current question  */
   function setupVideoTimestamps() {
     videoTimestampsUsed = [];
     var rawAttribute = quizVideoElement.getAttribute("data-pause-timestamps");
@@ -439,9 +412,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* --------------------------------------------------------
+  /* 
      8. LOADING A QUESTION ONTO THE SCREEN
-     -------------------------------------------------------- */
+     this section handles loading a new question onto the screen */
+
   function loadQuestion(index) {
     var question = quizQuestions[index];
 
@@ -453,8 +427,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var progressPercent = ((index + 1) / totalQuestions) * 100;
     progressFill.style.width = progressPercent + "%";
 
-    /* Reset the media blocks, then show the one this question
-       actually needs (if any) */
+    /* Hide all media blocks */
     hideAllMediaBlocks();
 
     if (question.media === "hotspot") {
@@ -474,9 +447,7 @@ document.addEventListener("DOMContentLoaded", function () {
       buildOptionButtons(question);
     }
 
-    /* If the student already answered this question before
-       (they clicked Previous to look back), restore how it
-       looked so their choice is still visible */
+    /* Restore the student's previous answer if it exists */
     var existingAnswer = studentAnswers[index];
     if (existingAnswer) {
       if (existingAnswer.selectionType === "option") {
@@ -507,9 +478,7 @@ document.addEventListener("DOMContentLoaded", function () {
       submitQuizBtn.hidden = true;
     }
 
-    /* Only restart the timer if this question has not already
-       timed out, so re-visiting a timed-out question does not
-       start counting down again */
+    /* Start the timer for the current question */
     if (!existingAnswer || !existingAnswer.wasTimeout) {
       startTimer();
     } else {
@@ -518,9 +487,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* --------------------------------------------------------
+  /* 
      9. NAVIGATION BETWEEN QUESTIONS
-     -------------------------------------------------------- */
+    this section handles navigating between questions */
+
   function goToNextQuestion() {
     stopTimer();
     if (currentQuestionIndex < totalQuestions - 1) {
@@ -540,18 +510,14 @@ document.addEventListener("DOMContentLoaded", function () {
   nextQuestionBtn.addEventListener("click", goToNextQuestion);
   prevQuestionBtn.addEventListener("click", goToPreviousQuestion);
 
-  /* --------------------------------------------------------
+  /* 
      10. SUBMITTING THE QUIZ
-     Gathers every answer collected so far, saves it to
-     localStorage as simple raw data, and sends the student to
-     results.html. The actual score maths happens in
-     scoring.js on the results page, not here.
-     -------------------------------------------------------- */
+     this section handles submitting the quiz and saving the results */
+
   function handleSubmitQuiz() {
     stopTimer();
 
-    /* If the very last question was never answered (student
-       clicked Submit early), fill in a blank answer for it */
+    /* Fill in a blank answer for the current question if it hasn't been answered */
     if (studentAnswers[currentQuestionIndex] === null) {
       studentAnswers[currentQuestionIndex] = {
         selectionType: "none",

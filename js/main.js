@@ -1,22 +1,20 @@
-/* ==========================================================
+/*
    MAIN.JS
    This file controls every small interactive behaviour that
    appears on more than one page of the site: the dark/light
    theme toggle, the mobile hamburger menu, the specialisation
    accordion cards, the "back to top" button, and the magnetic
-   hover effect on buttons. It is linked on every page so all
-   of these behaviours work everywhere, not just on one page.
-   ========================================================== */
+   hover effect on buttons. .
+    */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  /* ==========================================================
+  /* 
      1. THEME TOGGLE (LIGHT / DARK MODE)
-     Clicking the button adds or removes the "dark-theme" class
-     on <body>, which the CSS file uses to swap all the colours.
-     The chosen theme is saved in localStorage so it is
-     remembered the next time the student visits any page.
-     ========================================================== */
+     this section toggles the site's theme between light and dark mode. 
+     It also saves the student's choice in localStorage so that it persists across visits.
+    */
+
   var themeToggleBtn = document.querySelector("#themeToggleBtn");
 
   /* Swaps the button's icon between a moon and a sun depending
@@ -29,9 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* Runs once when the page first loads. If the student chose
-     dark mode on a previous visit, apply it straight away so
-     the page does not flash light mode first. */
+  /* Runs once when the page first loads. */
   function applySavedTheme() {
     var savedTheme = localStorage.getItem("bseSiteTheme");
 
@@ -57,12 +53,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* ==========================================================
+  /* 
      2. HAMBURGER MENU (MOBILE NAVIGATION)
-     Clicking the hamburger button opens a full-screen overlay
-     menu on small screens. Clicking it again, or clicking a
-     link inside the menu, closes it.
-     ========================================================== */
+     this section handles the mobile navigation menu that appears on small screens.
+    */
+
   var hamburgerBtn = document.querySelector("#hamburgerBtn");
   var mobileOverlay = document.querySelector("#mobileOverlay");
 
@@ -88,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     /* Closes the menu automatically whenever a link inside it
-       is clicked, so it does not stay open after navigating */
+       is clicked, so it does not stay open */
     var mobileMenuLinks = mobileOverlay.querySelectorAll("a");
     for (var i = 0; i < mobileMenuLinks.length; i++) {
       mobileMenuLinks[i].addEventListener("click", function () {
@@ -97,11 +92,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* ==========================================================
+  /* 
      3. ACCORDION CARDS (Specialisation Overview)
-     Clicking a card's header expands or collapses its detail
-     panel by toggling the "is-open" class on the whole card.
-     ========================================================== */
+     this section handles the accordion cards that appear on the specialisation overview page. 
+     Each card can be expanded or collapsed by clicking on the plus/minus icon that changes accordingly.
+      */
+
   var accordionTriggers = document.querySelectorAll("[data-accordion-trigger]");
 
   for (var t = 0; t < accordionTriggers.length; t++) {
@@ -125,12 +121,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* ==========================================================
+  /* 
      4. BACK TO TOP FLOATING BUTTON
-     The button stays hidden until the student scrolls down
-     300px, then fades in. Clicking it smoothly scrolls back
-     to the top of the page.
-     ========================================================== */
+     This section handles the floating action button that appears when the user scrolls down the page.
+      */
+
   var backToTopFab = document.querySelector("#backToTopFab");
 
   if (backToTopFab) {
@@ -147,12 +142,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* ==========================================================
+  /* 
      5. MAGNETIC BUTTON EFFECT
-     While the mouse hovers over a button with the "magnetic-btn"
-     class, the button shifts slightly toward the cursor. When
-     the mouse leaves, the button moves back to its normal spot.
-     ========================================================== */
+     this section handles the magnetic button effect that makes buttons shift slightly toward the cursor when hovered.
+      */
+
   var magneticButtons = document.querySelectorAll(".magnetic-btn");
 
   for (var b = 0; b < magneticButtons.length; b++) {
@@ -167,8 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
       var distanceX = event.clientX - buttonCenterX;
       var distanceY = event.clientY - buttonCenterY;
 
-      /* Only move the button a small fraction of that distance
-         so the effect feels gentle rather than jumping around */
+      /* Calculate the amount to move the button */
       var moveX = distanceX * 0.2;
       var moveY = distanceY * 0.2;
 

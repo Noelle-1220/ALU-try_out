@@ -9,11 +9,11 @@
 </head>
 <body>
 
-  <!-- ==========================================
+  <!-- 
        HEADER & NAVIGATION
-       Same header as the other pages so the site
-       feels consistent as the student moves around.
-       ========================================== -->
+       this section contains the header and navigation menu for the site
+       -->
+
   <header class="site-header">
     <div class="header-inner">
       <div class="site-logo">Aura <span>Velve</span></div>
@@ -54,16 +54,15 @@
     </ul>
   </div>
 
-  <!-- ==========================================
+  <!-- 
        MAIN PAGE CONTENT
-       ========================================== -->
+       this section contains the main content for the contact page
+       -->
   <main>
 
     <!-- ==========================================
          AUTHOR DETAILS
-         A short bio card introducing whoever built
-         this site, with a link to the public GitHub
-         repository for the project.
+         A short bio card introducing me and the link to my github repo for the project.
          ========================================== -->
     <section class="container" style="max-width: 700px; padding-top: var(--space-lg);">
       <h1 style="text-align:center; margin-bottom: var(--space-lg);">About the Author</h1>
@@ -80,7 +79,7 @@
           external frameworks or libraries.
         </p>
         <a
-          href="https://github.com/Noelle-1220/ALU-TRY-OUT"
+          href="https://github.com/Noelle-1220/BSE-Specialisation-Advisor"
           target="_blank"
           rel="noopener noreferrer"
           class="btn-primary magnetic-btn"
@@ -91,15 +90,11 @@
       </div>
     </section>
 
-    <!-- ==========================================
+    <!-- 
          INTERACTIVE CONTACT FORM
-         Same inline, real-time validation pattern as
-         the registration form on index.html: instant
-         checking on input/blur, is-valid/is-invalid
-         classes, and an error-message under each field.
-         The actual checking logic lives in validation.js
-         so both forms share one file.
-         ========================================== -->
+         this section contains the contact form for users to get in touch
+         -->
+
     <section class="container" style="max-width: 550px; margin-bottom: var(--space-xl);">
       <div class="card">
         <h2 style="text-align:center; margin-bottom: var(--space-md);">Get In Touch</h2>
@@ -109,17 +104,16 @@
         </p>
 
         <!-- Success message shown once the form has been
-             submitted successfully. Hidden until then. -->
+             submitted successfully. -->
         <p id="contactSuccessMessage" class="error-message" style="color: var(--accent-green);" hidden>
           Thanks! Your message has been received.
         </p>
 
         <!-- We use novalidate so the browser's built-in popups
-             do not appear. Our own JS handles all validation. -->
+             do not appear. the JS will handle all validation. -->
         <form id="contactForm" novalidate>
 
-          <!-- Name field: letters and spaces only, same rule
-               as the registration form's Student Name field -->
+          <!-- Name field: letters and spaces only -->
           <div class="form-group">
             <label for="contactName">Your Name</label>
             <input
@@ -132,7 +126,7 @@
             <small class="error-message" id="contactNameError"></small>
           </div>
 
-          <!-- Email field: any standard, valid email address -->
+          <!-- Email field -->
           <div class="form-group">
             <label for="contactEmail">Your Email</label>
             <input
@@ -168,9 +162,9 @@
 
   </main>
 
-  <!-- ==========================================
+  <!-- 
        FOOTER
-       ========================================== -->
+       this section contains the footer content for the page -->
   <footer class="site-footer">
     <p>&copy; 2026 BSE Specialisation Advisor. Built for the ALU Software Engineering programme.</p>
   </footer>
@@ -178,10 +172,9 @@
   <!-- Back to top floating button, hidden until the user scrolls -->
   <button id="backToTopFab" class="back-to-top-fab" aria-label="Back to top">↑</button>
 
-  <!-- Our JavaScript file for this page.
+  <!-- the JavaScript file needed for this page to run.
        "defer" makes sure the HTML loads first before the script runs.
-       This is the same validation.js file used on index.html, since
-       both pages share the same real-time form validation logic. -->
+       -->
   <script src="js/main.js" defer></script>     
   <script src="js/validation.js" defer></script>
 </body>

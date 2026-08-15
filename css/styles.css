@@ -1,15 +1,15 @@
-/* ==================================================
-   BSE SPECIALISATION ADVISOR - MAIN STYLESHEET
-   This file controls the look of every page on the site.
-   It is split into clear sections so it is easy to explain.
-   ================================================== */
+/* 
+   BSE SPECIALISATION ADVISOR - CSS STYLESHEET
+   This file controls the look of every page of the website.
+   I split it into section for easier navigation, each section carries comments.
+    */
 
-/* --------------------------------------------------
-   1. DESIGN TOKENS (CSS VARIABLES)
-   We store our colors, fonts, and spacing in variables
-   so we only have to change them in ONE place if we want
-   to update the whole site's look.
-   -------------------------------------------------- */
+/* 
+   1. CSS VARIABLES
+   I stored my colors, fonts, and spacing in variables
+   so I can only change this section to update the whole site's look.
+    */
+
 :root {
   /* Light theme colors (this is the default theme) */
   --bg-main: #FDFBF7;         /* soft cream page background */
@@ -19,7 +19,7 @@
   --accent-green: #0D7A5C;    /* green accent for buttons/links */
   --accent-gold: #D4AF37;     /* gold accent for highlights */
 
-  /* Extra helper colors used across the site */
+  /* Extra colors used across the site */
   --color-success: #0D7A5C;   /* used for valid form fields */
   --color-error: #C0392B;     /* used for invalid form fields */
   --color-border: #E0DED8;    /* light neutral border color */
@@ -50,10 +50,7 @@
   --shadow-card: 0 4px 14px rgba(13, 43, 69, 0.08);
 }
 
-/* Dark theme colors. These override the variables above
-   whenever the <body> has the class "dark-theme" on it.
-   Our JS file will add/remove this class when the toggle
-   button is clicked. */
+/* Dark theme colors. */
 body.dark-theme {
   --bg-main: #0B1A14;         /* deep emerald background */
   --bg-card: #162620;         /* surface gray card background */
@@ -65,11 +62,11 @@ body.dark-theme {
   --shadow-card: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
-/* --------------------------------------------------
+/* 
    2. RESET & BASE STYLES
-   This removes the browser's default spacing so every
-   browser starts from the same clean slate.
-   -------------------------------------------------- */
+   This section removes default browser styles and sets a consistent base for the site.
+    */
+
 * {
   margin: 0;
   padding: 0;
@@ -116,8 +113,7 @@ ul {
   list-style: none;
 }
 
-/* A reusable "container" class to keep page content from
-   stretching too wide on large screens. */
+/* A container class that keeps page content from stretching too wide on large screens. */
 .container {
   width: 100%;
   max-width: 1100px;
@@ -125,8 +121,7 @@ ul {
   padding: 0 var(--space-md);
 }
 
-/* Give every keyboard user a visible focus outline so the
-   site stays accessible (important for grading/accessibility). */
+/* Focus styles for accessibility(important for grading/accessibility) */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -135,9 +130,10 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
-/* --------------------------------------------------
+/* 
    3. HEADER & NAVIGATION
-   -------------------------------------------------- */
+    this section manages the styling for the site header and navigation */
+
 .site-header {
   position: sticky;
   top: 0;
@@ -166,7 +162,7 @@ textarea:focus-visible {
   color: var(--accent-gold);
 }
 
-/* The desktop navigation links, hidden on small screens */
+/* Main navigation */
 .main-nav ul {
   display: flex;
   gap: var(--space-md);
@@ -200,11 +196,11 @@ textarea:focus-visible {
   transform: scale(1.08);
 }
 
-/* --------------------------------------------------
-   4. HAMBURGER MENU (MOBILE NAVIGATION)
-   Hidden by default. It only appears on small screens
-   using the media query near the bottom of this file.
-   -------------------------------------------------- */
+/* 
+   4. HAMBURGER MENU
+   this section manages the hamburger menu that appears on small screens.
+    */
+
 .hamburger-btn {
   display: none;
   flex-direction: column;
@@ -223,8 +219,7 @@ textarea:focus-visible {
   transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
-/* When JS adds "menu-open" to the hamburger button, the
-   three lines animate into an "X" shape. */
+/* When the menu is open, the hamburger animates into an "X" */
 .hamburger-btn.menu-open span:nth-child(1) {
   transform: translateY(8.5px) rotate(45deg);
 }
@@ -237,8 +232,7 @@ textarea:focus-visible {
   transform: translateY(-8.5px) rotate(-45deg);
 }
 
-/* Full-screen overlay menu for mobile. Hidden until JS
-   adds the "overlay-visible" class. */
+/* Full-screen overlay menu for mobile.*/
 .mobile-overlay {
   position: fixed;
   inset: 0;
@@ -270,9 +264,10 @@ textarea:focus-visible {
   font-weight: 700;
 }
 
-/* --------------------------------------------------
+/* 
    5. HERO SECTION
-   -------------------------------------------------- */
+    this section manages the styling for the hero section */
+
 .hero-section {
   text-align: center;
   padding: var(--space-xl) var(--space-md);
@@ -290,9 +285,10 @@ textarea:focus-visible {
   color: var(--text-body);
 }
 
-/* --------------------------------------------------
+/* 
    6. CARDS (used for forms, quiz questions, results)
-   -------------------------------------------------- */
+    this section manages the styling for cards */
+
 .card {
   background-color: var(--bg-card);
   border: 1px solid var(--color-border);
@@ -308,9 +304,10 @@ textarea:focus-visible {
   box-shadow: var(--shadow-glow);
 }
 
-/* --------------------------------------------------
+/*
    7. REGISTRATION & CONTACT FORM STYLES
-   -------------------------------------------------- */
+    this section manages the styling for registration and contact forms */
+
 .form-group {
   margin-bottom: var(--space-md);
   text-align: left;
@@ -340,9 +337,7 @@ textarea:focus-visible {
   resize: vertical;
 }
 
-/* Valid/invalid states added by our validation.js file.
-   We use classes instead of alert boxes so the feedback
-   feels instant and modern. */
+/* Valid/invalid states added by the validation.js file. */
 .form-group input.is-valid,
 .form-group textarea.is-valid {
   border-color: var(--color-success);
@@ -368,7 +363,7 @@ textarea:focus-visible {
   display: none;
 }
 
-/* Generic button style used for form submits and CTAs */
+/*  button style used for form submits and Call To Actions */
 .btn-primary {
   display: inline-block;
   background-color: var(--accent-green);
@@ -396,19 +391,20 @@ textarea:focus-visible {
 .btn-primary[hidden] {
   display: none;
 }
-/* --------------------------------------------------
+/* 
    8. MAGNETIC BUTTON EFFECT
-   Our JS file reads the mouse position and moves the
-   button slightly toward the cursor. This transform
-   property is what makes that movement look smooth.
-   -------------------------------------------------- */
+   this for user intelactive buttons that "follow" the mouse cursor when hovered.
+    */
+
 .magnetic-btn {
   transition: transform 0.15s ease-out;
 }
 
-/* --------------------------------------------------
+/* 
+
    9. ACCORDION CARDS (Specialisation Overview)
-   -------------------------------------------------- */
+   this section will manage the cards structure and their behavior  */
+
 .accordion-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -448,8 +444,7 @@ textarea:focus-visible {
   text-align: center;
 }
 
-/* The hidden detail panel. We animate max-height so the
-   expand/collapse looks smooth instead of snapping open. */
+/* The hidden detail panel, when the action is done. */
 .accordion-details {
   max-height: 0;
   overflow: hidden;
@@ -460,14 +455,14 @@ textarea:focus-visible {
   padding-top: var(--space-sm);
 }
 
-/* JS adds this class to the parent card when it is opened */
+/* JS will add this class to the parent card when it is opened */
 .accordion-card.is-open .accordion-details {
   max-height: 300px;
 }
 
-/* --------------------------------------------------
+/* 
    10. QUIZ PAGE STYLES
-   -------------------------------------------------- */
+   this will manage the quiz page layout and elements */
 .quiz-header-bar {
   display: flex;
   align-items: center;
@@ -490,7 +485,7 @@ textarea:focus-visible {
   text-align: center;
 }
 
-/* Turns red when time is running low (JS adds this class) */
+/* Turns red when time is running low (JS will add this class) */
 .timer-display.timer-warning {
   border-color: var(--color-error);
   color: var(--color-error);
@@ -553,7 +548,7 @@ textarea:focus-visible {
   cursor: not-allowed;
 }
 
-/* Coordinate hotspot map (ALCHE campus reference) */
+/* Hotspot alche-map image container */
 .hotspot-map-wrapper {
   position: relative;
   border-radius: var(--radius-md);
@@ -577,7 +572,7 @@ textarea:focus-visible {
   transform: translate(-50%, -50%) scale(1.25);
 }
 
-/* Simple custom audio player controls */
+/* Audio player container */
 .audio-player-box {
   display: flex;
   align-items: center;
@@ -597,11 +592,11 @@ textarea:focus-visible {
   font-size: 1rem;
 }
 
-/* --------------------------------------------------
+/* 
    11. RESULTS PAGE STYLES
-   -------------------------------------------------- */
+   this section manages the styling for the results page */
 
-/* Full-screen preloader shown while "calculating" results */
+/* Full-screen preloader shown while results are being calculated */
 .preloader-screen {
   position: fixed;
   inset: 0;
@@ -622,7 +617,7 @@ textarea:focus-visible {
   color: var(--text-heading);
 }
 
-/* Simple rotating spinner built with a border trick */
+/* Preloader spinner to engage users */
 .preloader-spinner {
   width: 50px;
   height: 50px;
@@ -637,7 +632,7 @@ textarea:focus-visible {
   to { transform: rotate(360deg); }
 }
 
-/* Fades the preloader out once JS is done "calculating" */
+/* Fades the preloader out once JS is done calculating */
 .preloader-screen.preloader-hidden {
   opacity: 0;
   pointer-events: none;
@@ -657,7 +652,7 @@ textarea:focus-visible {
   margin-bottom: var(--space-lg);
 }
 
-/* The wrapper that holds our Canvas 2D chart */
+/* The wrapper that holds the Canvas 2D chart */
 .canvas-chart-wrapper {
   background-color: var(--bg-card);
   border: 1px solid var(--color-border);
@@ -671,9 +666,10 @@ textarea:focus-visible {
   height: auto;
 }
 
-/* --------------------------------------------------
+/* 
    12. FOOTER
-   -------------------------------------------------- */
+   this section manages the styling for the footer */
+
 .site-footer {
   text-align: center;
   padding: var(--space-lg) var(--space-md);
@@ -682,11 +678,12 @@ textarea:focus-visible {
   margin-top: var(--space-xl);
 }
 
-/* --------------------------------------------------
+/* 
    13. BACK TO TOP FAB (Floating Action Button)
    Hidden until the user scrolls down 300px. JS toggles
    the "fab-visible" class.
-   -------------------------------------------------- */
+   */
+
 .back-to-top-fab {
   position: fixed;
   bottom: var(--space-md);
@@ -713,9 +710,10 @@ textarea:focus-visible {
   pointer-events: auto;
 }
 
-/* --------------------------------------------------
+/* 
    14. CONTACT / AUTHOR PAGE STYLES
-   -------------------------------------------------- */
+   this section manages the styling for the author bio section */
+
 .author-bio-section {
   display: flex;
   align-items: center;
@@ -750,11 +748,11 @@ textarea:focus-visible {
   color: var(--bg-card);
 }
 
-/* --------------------------------------------------
+/* 
    15. RESPONSIVE MEDIA QUERIES
-   These rules only apply on smaller screens, like
-   tablets and phones (anything below 768px wide).
-   -------------------------------------------------- */
+   This section will apply on smaller screens like phones, tablets.
+    */
+
 @media (max-width: 768px) {
   /* Hide the normal desktop nav and show the hamburger */
   .main-nav {
@@ -781,11 +779,11 @@ textarea:focus-visible {
   }
 }
 
-/* --------------------------------------------------
+/* 
    16. REDUCED MOTION SUPPORT
-   Respects users who have asked their operating system
-   to limit animations, for accessibility.
-   -------------------------------------------------- */
+   this section manages the styling for users who have requested reduced motion on their devices.
+    */
+    
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

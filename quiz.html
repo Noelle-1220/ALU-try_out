@@ -9,11 +9,10 @@
 </head>
 <body>
 
-  <!-- ==========================================
+  <!-- 
        HEADER & NAVIGATION
-       Same header as index.html so the site feels
-       consistent as the student moves between pages.
-       ========================================== -->
+       this section contains the header and navigation for the page -->
+
   <header class="site-header">
     <div class="header-inner">
       <div class="site-logo">Aura <span>Velve</span></div>
@@ -54,9 +53,9 @@
     </ul>
   </div>
 
-  <!-- ==========================================
+  <!-- 
        MAIN PAGE CONTENT
-       ========================================== -->
+       this section contains the main content for the quiz page -->
   <main>
 
     <!-- QUIZ INTRO: short heading and instructions so the
@@ -73,55 +72,40 @@
 
     <section class="container" style="max-width: 750px; margin-bottom: var(--space-xl);">
 
-      <!-- ==========================================
+      <!-- 
            QUIZ HEADER BAR
-           Shows which question we are on and the
-           countdown timer for the current question.
-           quiz-engine.js updates both of these values.
-           ========================================== -->
+           this section the current question and timer -->
       <div class="quiz-header-bar">
         <p id="questionCounter" style="font-weight:600;">Question 1 of 10</p>
         <div id="timerDisplay" class="timer-display">00:30</div>
       </div>
 
-      <!-- ==========================================
+      <!-- 
            PROGRESS BAR
-           The fill width is updated by JS every time
-           the student moves to a new question.
-           ========================================== -->
+           This shows the student's progress through the quiz. -->
       <div class="progress-track">
         <div id="progressFill" class="progress-fill"></div>
       </div>
 
-      <!-- Message shown only when the timer reaches zero.
-           Hidden by default using the standard HTML
-           "hidden" attribute (no custom CSS class needed). -->
+      <!-- Time is up message -->
       <p id="timeUpMessage" class="error-message" hidden>
         Time is up for this question! Moving on automatically&hellip;
       </p>
 
-      <!-- ==========================================
+      <!-- 
            MAIN QUESTION CARD
-           quiz-engine.js fills in the question text and
-           builds the answer buttons inside these two
-           empty containers below.
-           ========================================== -->
+           this contains the question text and answer options -->
       <div class="card">
         <p id="quizQuestionText" class="quiz-question-text">
           Loading your first question&hellip;
         </p>
 
-        <!-- quiz-engine.js will insert one .quiz-option-btn
-             button here for every answer choice -->
+        <!-- Answer options will be inserted here by JavaScript -->
         <div id="quizOptionsList" class="quiz-options-list"></div>
 
-        <!-- ==========================================
+        <!-- 
              INTERACTIVE MEDIA ZONE
-             These three blocks only relate to certain
-             questions. quiz-engine.js shows the correct
-             one (and hides the other two) depending on
-             which question is currently on screen.
-             ========================================== -->
+             this section contains interactive media elements for certain questions -->
 
         <!-- MEDIA BLOCK 1: Coordinate hotspot map (ALCHE campus) -->
         <div id="hotspotMediaBlock" style="margin-top: var(--space-md);" hidden>
@@ -157,9 +141,7 @@
             Listen to the short clip, then choose the answer that fits best.
           </p>
 
-          <!-- The native audio element stays hidden. We build our
-               own play button and seek bar so the controls match
-               the site's design instead of the browser default look. -->
+          <!-- Custom audio player -->
           <audio id="quizAudioElement" preload="metadata" style="display:none;">
             <!-- Replace this src with the real audio clip file -->
             <source src="images/specialization-clip.mp4" type="audio/mpeg">
@@ -182,8 +164,7 @@
             moments so you can answer what you would do next.
           </p>
 
-          <!-- data-pause-timestamps lists (in seconds) the exact
-               moments quiz-engine.js should pause this video at -->
+          <!-- Custom video player -->
           <video id="quizVideoElement" width="100%" preload="metadata" controls
             data-pause-timestamps="5,16">
             <!-- Replace this src with the real scenario video file -->
@@ -192,11 +173,9 @@
           </video>
         </div>
 
-        <!-- ==========================================
+        <!-- 
              QUIZ NAVIGATION BUTTONS
-             Previous/Next move between questions, and
-             Submit Quiz only appears on the final one.
-             ========================================== -->
+            this section contains the buttons for navigating between questions -->
         <div style="display:flex; justify-content:space-between; gap: var(--space-sm); margin-top: var(--space-lg);">
           <button type="button" id="prevQuestionBtn" class="btn-primary magnetic-btn" disabled>
             Previous
@@ -214,9 +193,9 @@
 
   </main>
 
-  <!-- ==========================================
+  <!-- 
        FOOTER
-       ========================================== -->
+       this section contains the footer content for the page -->
   <footer class="site-footer">
     <p>&copy; 2026 BSE Specialisation Advisor. Built for the ALU Software Engineering programme.</p>
   </footer>
@@ -224,7 +203,7 @@
   <!-- Back to top floating button, hidden until the user scrolls -->
   <button id="backToTopFab" class="back-to-top-fab" aria-label="Back to top">↑</button>
 
-  <!-- Our JavaScript file for this page.
+  <!-- the JavaScript files needed for this page to run.
        "defer" makes sure the HTML loads first before the script runs. -->
   <script src="js/main.js" defer></script>     
   <script src="js/quiz-engine.js" defer></script>
