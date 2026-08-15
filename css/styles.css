@@ -363,6 +363,10 @@ textarea:focus-visible {
   font-size: 0.85rem;
   margin-top: var(--space-xs);
 }
+/* Hide error messages that are marked as hidden (used for form validation) */
+.error-message[hidden] {
+  display: none;
+}
 
 /* Generic button style used for form submits and CTAs */
 .btn-primary {

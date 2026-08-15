@@ -228,6 +228,13 @@ document.addEventListener("DOMContentLoaded", function () {
       if (secondsRemaining <= 10) {
         timerDisplay.classList.add("timer-warning");
       }
+      
+      /* Show a "10 seconds left" message once the countdown hits zero */
+
+      if (secondsRemaining === 0) {
+        timeUpMessage.textContent = "10 seconds left! Better Hurry.";
+        timeUpMessage.hidden = false;
+      }
 
       if (secondsRemaining <= 0) {
         handleTimeUp();
@@ -241,6 +248,7 @@ document.addEventListener("DOMContentLoaded", function () {
      move on (or submit) after a short pause. */
   function handleTimeUp() {
     stopTimer();
+    timeUpMessage.textContent = "Time is up for this question! Moving on automatically\u2026";
     timeUpMessage.hidden = false;
     lockAllAnswerControls();
 
