@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var studentAnswers = new Array(totalQuestions).fill(null);
   var countdownTimerId = null;
   var secondsRemaining = 0;
-  var QUESTION_TIME_LIMIT = 30; /* seconds allowed per question */
+  var QUESTION_TIME_LIMIT = 120; /* seconds allowed per question */
 
   /* Keeps track of which video pause-timestamps have already
      been used, so the video does not pause twice at the same
